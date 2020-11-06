@@ -59,6 +59,7 @@ flutter:
     - lib/assets/images/upload.png
     - lib/assets/images/vibez-pattern.png
     - lib/assets/images/vibez-text-logo.png
+    - lib/assets/images/tab.png
    
 
   # An image asset can refer to one or more resolution-specific "variants", see
