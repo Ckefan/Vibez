@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'pages/login/login.dart';
+import 'pages/home/home.dart';
 
 void main() {
   runApp(MyApp());
@@ -62,7 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
       // called again, and so nothing would appear to happen.
       _counter++;
       Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return Login();
+        return Home();
       }));
     });
   }
