@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
+  final setstatus;
+  Login({Key key, this.setstatus}) : super(key: key);
+
   @override
   _LoginState createState() => _LoginState();
 }
@@ -126,7 +129,7 @@ class _LoginState extends State<Login> {
               'Cancel',
               style: TextStyle(color: Color.fromRGBO(255, 255, 255, 1)),
             ),
-            onPressed: () {},
+            onPressed: () => widget.setstatus(0),
           )
         ],
       ),
