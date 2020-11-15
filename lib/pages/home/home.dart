@@ -1,9 +1,12 @@
 import 'package:Vibez/components/login/login.dart';
+import 'package:Vibez/components/login/signup.dart';
 import 'package:flutter/material.dart';
-// import 'package:Vibez/components/login/login.dart';
 
 // ignore: must_be_immutable
 class Home extends StatefulWidget {
+  final status;
+  Home({Key key, this.status}) : super(key: key);
+
   @override
   _HomeState createState() => _HomeState();
 }
@@ -17,7 +20,13 @@ class _HomeState extends State {
       resizeToAvoidBottomInset: false,
       body: Container(
         decoration: BoxDecoration(
-          color: Colors.black,
+          gradient: new LinearGradient(
+              begin: Alignment.center,
+              end: Alignment.bottomCenter,
+              colors: [
+                Colors.black,
+                Color.fromRGBO(0, 89, 135, 1),
+              ]),
           image: DecorationImage(
             image: AssetImage(avatar),
             fit: BoxFit.fill,
@@ -25,7 +34,11 @@ class _HomeState extends State {
         ),
         width: double.infinity,
         height: double.infinity,
-        child: status == 0 ? homeWidget() : Login(setstatus: setStatus),
+        child: status == 0
+            ? homeWidget()
+            : status == 1
+                ? Login(setstatus: setStatus)
+                : Signup(setstatus: setStatus),
       ),
     );
   }
@@ -106,7 +119,7 @@ class _HomeState extends State {
                 color: Colors.transparent,
                 elevation: 0, // 正常时阴影隐藏
                 highlightElevation: 0, // 点击
-                onPressed: () {},
+                onPressed: () => setStatus(2),
               ),
             ),
           ),

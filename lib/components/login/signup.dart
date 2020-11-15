@@ -1,25 +1,14 @@
-import 'package:Vibez/pages/trouble/trouble_logging_in.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-class Login extends StatefulWidget {
+class Signup extends StatefulWidget {
   final setstatus;
-  Login({Key key, this.setstatus}) : super(key: key);
+  Signup({Key key, this.setstatus}) : super(key: key);
 
   @override
-  _LoginState createState() => _LoginState();
+  _SignupState createState() => _SignupState();
 }
 
-class _LoginState extends State<Login> {
-  TapGestureRecognizer _tapGestureRecognizer = new TapGestureRecognizer();
-
-  @override
-  void dispose() {
-    //用到GestureRecognizer的话一定要调用其dispose方法释放资源
-    _tapGestureRecognizer.dispose();
-    super.dispose();
-  }
-
+class _SignupState extends State<Signup> {
   @override
   Widget build(BuildContext context) {
     final fontColor =
@@ -30,13 +19,12 @@ class _LoginState extends State<Login> {
         children: <Widget>[
           Container(
             margin: EdgeInsets.only(
-                top: MediaQuery.of(context).viewInsets.bottom > 0
-                    ? 100.0
-                    : 300.0,
+                top:
+                    MediaQuery.of(context).viewInsets.bottom > 0 ? 10.0 : 300.0,
                 bottom:
-                    0.0), //MediaQuery.of(context).viewInsets.bottom变量在键盘弹出前是0，键盘弹起后的就是键盘的高度
+                    10.0), //MediaQuery.of(context).viewInsets.bottom变量在键盘弹出前是0，键盘弹起后的就是键盘的高度
             child: Text(
-              'LOG IN',
+              'SIGN UP',
               style: TextStyle(
                   fontSize: 25.0,
                   fontWeight: FontWeight.w300,
@@ -44,7 +32,46 @@ class _LoginState extends State<Login> {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(top: 14.0, bottom: 10.0),
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                border: Border.all(color: Color.fromRGBO(112, 112, 112, 1)),
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              child: Padding(
+                padding: EdgeInsets.only(left: 13.0),
+                child: TextField(
+                  autofocus: true,
+                  style: fontColor,
+                  decoration: InputDecoration(
+                      hintText: 'PHONE NUMBER OR EMAIL',
+                      border: InputBorder.none,
+                      hintStyle: fontColor),
+                ),
+              ),
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 10.0),
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                border: Border.all(color: Color.fromRGBO(112, 112, 112, 1)),
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              child: Padding(
+                padding: EdgeInsets.only(left: 13.0),
+                child: TextField(
+                  autofocus: true,
+                  style: fontColor,
+                  decoration: InputDecoration(
+                      hintText: 'NAME',
+                      border: InputBorder.none,
+                      hintStyle: fontColor),
+                ),
+              ),
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 10.0, bottom: 10.0),
             child: DecoratedBox(
               decoration: BoxDecoration(
                 border: Border.all(color: Color.fromRGBO(112, 112, 112, 1)),
@@ -83,36 +110,7 @@ class _LoginState extends State<Login> {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(top: 8.0, bottom: 8.0),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text.rich(
-                TextSpan(children: [
-                  TextSpan(
-                    text: 'Forgot Login Info? ',
-                    style: TextStyle(
-                      fontSize: 12.0,
-                      color: Color.fromRGBO(112, 112, 112, 1),
-                    ),
-                  ),
-                  TextSpan(
-                      text: ' Get Help',
-                      style: TextStyle(
-                        fontSize: 12.0,
-                        color: Color.fromRGBO(41, 169, 224, 1),
-                      ),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                            return TroubleLoggingIn();
-                          }));
-                        }),
-                ]),
-              ),
-            ),
-          ),
-          Container(
+            margin: EdgeInsets.only(top: 10.0, bottom: 10.0),
             width: double.infinity,
             height: 50.0,
             decoration: BoxDecoration(
@@ -120,15 +118,15 @@ class _LoginState extends State<Login> {
                 begin: Alignment(0.0, -1.0),
                 end: Alignment(0.0, 1.0),
                 colors: [
-                  Color.fromRGBO(41, 169, 224, 1),
-                  Color.fromRGBO(82, 168, 204, 1),
+                  Color.fromRGBO(255, 35, 57, 1),
+                  Color.fromRGBO(188, 0, 53, 1),
                 ],
               ),
               borderRadius: BorderRadius.circular(30.0),
             ),
             child: RaisedButton(
               child: Text(
-                "LOG IN",
+                "NEXT",
                 style: TextStyle(
                     color: Color.fromRGBO(255, 255, 255, 1),
                     fontSize: 25.0,
@@ -140,16 +138,24 @@ class _LoginState extends State<Login> {
               onPressed: () {},
             ),
           ),
-          RaisedButton(
-            color: Colors.transparent,
-            elevation: 0, //normal shadow
-            child: Text(
-              'Cancel',
-              style: TextStyle(
-                  color: Color.fromRGBO(255, 255, 255, 1), fontSize: 12.0),
+          Text(
+            'By signing up you agree to our Terms & Privacy Policy',
+            style: TextStyle(
+                color: Color.fromRGBO(184, 184, 184, 1), fontSize: 12.0),
+          ),
+          Container(
+            height: 32.0,
+            child: RaisedButton(
+              color: Colors.transparent,
+              elevation: 0, //normal shadow
+              child: Text(
+                'Cancel',
+                style: TextStyle(
+                    color: Color.fromRGBO(255, 255, 255, 1), fontSize: 12.0),
+              ),
+              onPressed: () => widget.setstatus(0),
             ),
-            onPressed: () => widget.setstatus(0),
-          )
+          ),
         ],
       ),
     );
