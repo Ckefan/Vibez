@@ -8,13 +8,14 @@ class TroubleLoggingIn extends StatefulWidget {
 }
 
 class _TroubleLoggingInState extends State<TroubleLoggingIn> {
+  int forgotStatus = 1; //1:forgot username  2:forgot password
   @override
   Widget build(BuildContext context) {
     final fontColor =
         TextStyle(color: Color.fromRGBO(184, 184, 184, 1), fontSize: 15.0);
-    int status = 1;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Container(
         decoration: BoxDecoration(
           gradient: new LinearGradient(
@@ -28,15 +29,17 @@ class _TroubleLoggingInState extends State<TroubleLoggingIn> {
         width: double.infinity,
         height: double.infinity,
         child: Padding(
-          padding: EdgeInsets.all(40.0),
+          padding: EdgeInsets.only(left: 30.0, right: 30.0, top: 113.0),
           child: Column(children: <Widget>[
             Text(
               "Trouble Logging IN?",
               style: TextStyle(
-                  fontSize: 25.0, color: Color.fromRGBO(246, 246, 246, 1)),
+                  fontSize: 25.0,
+                  color: Color.fromRGBO(246, 246, 246, 1),
+                  fontFamily: 'Extra'),
             ),
             Container(
-              margin: EdgeInsets.only(top: 10.0),
+              margin: EdgeInsets.only(top: 37.0),
               width: 186.0,
               height: 31.0,
               decoration: BoxDecoration(
@@ -61,11 +64,13 @@ class _TroubleLoggingInState extends State<TroubleLoggingIn> {
                 color: Colors.transparent,
                 elevation: 0, // 正常时阴影隐藏
                 highlightElevation: 0, // 点击
-                onPressed: () {},
+                onPressed: () => setState(() {
+                  forgotStatus = 1;
+                }),
               ),
             ),
             Container(
-              margin: EdgeInsets.only(top: 7.0, bottom: 22.0),
+              margin: EdgeInsets.only(top: 7.0, bottom: 17.0),
               width: 186.0,
               height: 31.0,
               decoration: BoxDecoration(
@@ -90,15 +95,17 @@ class _TroubleLoggingInState extends State<TroubleLoggingIn> {
                 color: Colors.transparent,
                 elevation: 0, // 正常时阴影隐藏
                 highlightElevation: 0, // 点击
-                onPressed: () {},
+                onPressed: () => setState(() {
+                  forgotStatus = 2;
+                }),
               ),
             ),
             Text(
-              'FORGOT USERNAME',
+              forgotStatus == 1 ? 'FORGOT USERNAME' : 'FORGOT PASSWORD',
               style: TextStyle(color: Colors.white, fontSize: 15.0),
             ),
             Container(
-              margin: EdgeInsets.only(top: 10.0, bottom: 10.0),
+              margin: EdgeInsets.only(top: 17.0, bottom: 10.0),
               child: DecoratedBox(
                 decoration: BoxDecoration(
                   border: Border.all(color: Color.fromRGBO(112, 112, 112, 1)),
@@ -117,6 +124,28 @@ class _TroubleLoggingInState extends State<TroubleLoggingIn> {
                 ),
               ),
             ),
+            forgotStatus == 2
+                ? Container(
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        border:
+                            Border.all(color: Color.fromRGBO(112, 112, 112, 1)),
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 13.0),
+                        child: TextField(
+                          autofocus: true,
+                          style: fontColor,
+                          decoration: InputDecoration(
+                              hintText: 'USERNAME',
+                              border: InputBorder.none,
+                              hintStyle: fontColor),
+                        ),
+                      ),
+                    ),
+                  )
+                : Container(),
             Container(
               margin: EdgeInsets.only(top: 10.0, bottom: 10.0),
               width: double.infinity,
@@ -154,11 +183,13 @@ class _TroubleLoggingInState extends State<TroubleLoggingIn> {
                 child: Text(
                   'Cancel',
                   style: TextStyle(
-                      color: Color.fromRGBO(255, 255, 255, 1), fontSize: 12.0),
+                      color: Color.fromRGBO(255, 255, 255, 1),
+                      fontSize: 12.0,
+                      fontFamily: 'Regular'),
                 ),
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return Home(status: status);
+                    return Home(type: 1);
                   }));
                 },
               ),

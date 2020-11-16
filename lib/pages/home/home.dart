@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class Home extends StatefulWidget {
-  final status;
-  Home({Key key, this.status}) : super(key: key);
-
+  Home({Key key, this.type}) : super(key: key);
+  final type;
   @override
   _HomeState createState() => _HomeState();
 }
@@ -16,6 +15,7 @@ class _HomeState extends State {
   @override
   Widget build(BuildContext context) {
     final avatar = "lib/assets/images/vibez-pattern.png";
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
@@ -34,7 +34,7 @@ class _HomeState extends State {
         ),
         width: double.infinity,
         height: double.infinity,
-        child: status == 0
+        child: status == 0 && widget.type == 1
             ? homeWidget()
             : status == 1
                 ? Login(setstatus: setStatus)
