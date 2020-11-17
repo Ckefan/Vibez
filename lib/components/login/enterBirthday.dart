@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 class EnterBirthday extends StatefulWidget {
   final setstatus;
@@ -9,49 +10,69 @@ class EnterBirthday extends StatefulWidget {
 }
 
 class _EnterBirthdayState extends State<EnterBirthday> {
+  var birthdayDate = '';
+  var selDate = DateTime(1980, 6, 15);
   @override
   Widget build(BuildContext context) {
-    final fontColor =
-        TextStyle(color: Color.fromRGBO(184, 184, 184, 1), fontSize: 15.0);
-
     return Padding(
       padding: EdgeInsets.all(30.0),
       child: Column(children: [
-        Text(
-          'ENTER YOUR Birthday',
-          style: TextStyle(
-              fontSize: 25.0,
-              color: Color.fromRGBO(246, 246, 246, 1),
-              fontFamily: 'Extra'),
+        Container(
+          margin: EdgeInsets.only(
+              top: MediaQuery.of(context).viewInsets.bottom > 0 ? 180.0 : 300.0,
+              bottom: 10.0),
+          child: Text(
+            'ENTER YOUR Birthday',
+            style: TextStyle(
+                fontSize: 25.0,
+                color: Color.fromRGBO(246, 246, 246, 1),
+                fontFamily: 'Extra'),
+          ),
         ),
         Container(
-          margin: EdgeInsets.only(top: 14.0, bottom: 10.0),
+          margin: EdgeInsets.only(top: 14.0),
+          width: double.infinity,
           child: DecoratedBox(
             decoration: BoxDecoration(
               border: Border.all(color: Color.fromRGBO(112, 112, 112, 1)),
               borderRadius: BorderRadius.circular(15.0),
             ),
-            child: Padding(
-              padding: EdgeInsets.only(left: 13.0),
-              child: TextField(
-                autofocus: true,
-                style: fontColor,
-                decoration: InputDecoration(
-                    hintText: 'MM/DD/YYY',
-                    border: InputBorder.none,
-                    hintStyle: fontColor),
-              ),
-            ),
+            child: FlatButton(
+                onPressed: () {
+                  DatePicker.showDatePicker(context,
+                      showTitleActions: true,
+                      minTime: DateTime(1800, 1, 1),
+                      maxTime: DateTime.now(), onChanged: (date) {
+                    print('change $date');
+                  }, onConfirm: (date) {
+                    print('confirm $date');
+                    setState(() {
+                      selDate = date;
+                      birthdayDate =
+                          '${date.month > 9 ? date.month : '0' + date.month.toString()} / ${date.day > 9 ? date.day : '0' + date.day.toString()} / ${date.year}';
+                    });
+                  }, currentTime: selDate, locale: LocaleType.en);
+                },
+                child: Text(
+                  birthdayDate != '' ? birthdayDate : 'MM/DD/YYYY',
+                  style: TextStyle(
+                      color: Color.fromRGBO(184, 184, 184, 1),
+                      fontSize: 16.0,
+                      fontFamily: 'Regular'),
+                )),
           ),
         ),
         Text(
-          '',
+          'We ask for your age to provide you with a fun & safe experience will using Vibez',
+          textAlign: TextAlign.center,
           style: TextStyle(
-              fontSize: 11.0,
-              color: Color.fromRGBO(184, 184, 184, 1),
-              letterSpacing: 20.0),
+            fontSize: 12.0,
+            color: Color.fromRGBO(184, 184, 184, 1),
+            height: 2,
+          ),
         ),
         Container(
+          margin: EdgeInsets.only(top: 10.0),
           width: double.infinity,
           height: 50.0,
           decoration: BoxDecoration(
@@ -87,7 +108,7 @@ class _EnterBirthdayState extends State<EnterBirthday> {
             style: TextStyle(
                 color: Color.fromRGBO(255, 255, 255, 1), fontSize: 12.0),
           ),
-          onPressed: () => widget.setstatus(0),
+          onPressed: () => widget.setstatus(2),
         )
       ]),
     );

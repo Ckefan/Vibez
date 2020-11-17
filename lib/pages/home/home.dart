@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 class Home extends StatefulWidget {
   //typeStatus is “from trouble_logging_in” page to home ，show login
   final typeStatus;
-  Home({Key key, this.typeStatus = ''}) : super(key: key);
+  Home({Key key, this.typeStatus}) : super(key: key);
   @override
   _HomeState createState() => _HomeState();
 }
@@ -75,7 +75,7 @@ class _HomeState extends State<Home> {
             ),
           ),
           Align(
-            alignment: FractionalOffset(0.1, .82),
+            alignment: FractionalOffset(0.1, .8),
             child: Container(
               width: double.infinity,
               height: 50.0,

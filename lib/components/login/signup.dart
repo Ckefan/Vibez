@@ -135,7 +135,7 @@ class _SignupState extends State<Signup> {
               color: Colors.transparent,
               elevation: 0, // 正常时阴影隐藏
               highlightElevation: 0, // 点击
-              onPressed: () {},
+              onPressed: () => widget.setstatus(3),
             ),
           ),
           Text(
