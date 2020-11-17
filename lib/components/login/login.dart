@@ -1,3 +1,4 @@
+import 'package:Vibez/pages/confirmationCode/confirmationCode.dart';
 import 'package:Vibez/pages/trouble/trouble_logging_in.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -137,7 +138,11 @@ class _LoginState extends State<Login> {
               color: Colors.transparent,
               elevation: 0, // 正常时阴影隐藏
               highlightElevation: 0, // 点击
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return ConfirmationCode();
+                }));
+              },
             ),
           ),
           RaisedButton(

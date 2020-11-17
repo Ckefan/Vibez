@@ -189,7 +189,7 @@ class _TroubleLoggingInState extends State<TroubleLoggingIn> {
                 ),
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return Home(type: 1);
+                    return Home(typeStatus: 1);
                   }));
                 },
               ),

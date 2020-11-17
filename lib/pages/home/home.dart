@@ -1,17 +1,27 @@
+import 'package:Vibez/components/login/enterBirthday.dart';
 import 'package:Vibez/components/login/login.dart';
 import 'package:Vibez/components/login/signup.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class Home extends StatefulWidget {
-  Home({Key key, this.type}) : super(key: key);
-  final type;
+  //typeStatus is “from trouble_logging_in” page to home ，show login
+  final typeStatus;
+  Home({Key key, this.typeStatus = ''}) : super(key: key);
   @override
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State {
-  int status = 0; //0:homepage 1:login 2:signup
+class _HomeState extends State<Home> {
+  int status = 0; //0:homepage 1:login 2:signup 3:EnterBirthday
+  int typeStatus = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    typeStatus = widget.typeStatus;
+  }
+
   @override
   Widget build(BuildContext context) {
     final avatar = "lib/assets/images/vibez-pattern.png";
@@ -34,11 +44,13 @@ class _HomeState extends State {
         ),
         width: double.infinity,
         height: double.infinity,
-        child: status == 0 && widget.type == 1
-            ? homeWidget()
-            : status == 1
-                ? Login(setstatus: setStatus)
-                : Signup(setstatus: setStatus),
+        child: status == 1 || typeStatus == 1
+            ? Login(setstatus: setStatus)
+            : status == 0
+                ? homeWidget()
+                : status == 2
+                    ? Signup(setstatus: setStatus)
+                    : EnterBirthday(setstatus: setStatus),
       ),
     );
   }
@@ -48,6 +60,7 @@ class _HomeState extends State {
   void setStatus(val) {
     setState(() {
       status = val;
+      typeStatus = val == 0 ? 0 : typeStatus; //if login page click Cancel  is 0
     });
   }
 
@@ -62,7 +75,7 @@ class _HomeState extends State {
             ),
           ),
           Align(
-            alignment: FractionalOffset(0.1, .8),
+            alignment: FractionalOffset(0.1, .82),
             child: Container(
               width: double.infinity,
               height: 50.0,
