@@ -1,4 +1,4 @@
-import 'package:Vibez/pages/home/home.dart';
+import 'package:Vibez/pages/entry/entry.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -189,7 +189,7 @@ class _TroubleLoggingInState extends State<TroubleLoggingIn> {
                 ),
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return Home(typeStatus: 1);
+                    return Entry(typeStatus: 1);
                   }));
                 },
               ),

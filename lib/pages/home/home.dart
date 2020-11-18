@@ -1,141 +1,221 @@
-import 'package:Vibez/components/login/enterBirthday.dart';
-import 'package:Vibez/components/login/login.dart';
-import 'package:Vibez/components/login/signup.dart';
+import 'package:Vibez/components/home/following.dart';
+import 'package:Vibez/pages/discover/discover.dart';
+import 'package:Vibez/pages/inbox/inbox.dart';
+import 'package:Vibez/pages/my/my.dart';
+import 'package:Vibez/pages/upload/upload.dart';
 import 'package:flutter/material.dart';
 
-// ignore: must_be_immutable
 class Home extends StatefulWidget {
-  //typeStatus is “from trouble_logging_in” page to home ，show login
-  final typeStatus;
-  Home({Key key, this.typeStatus}) : super(key: key);
+  const Home({Key key}) : super(key: key);
   @override
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
-  int status = 0; //0:homepage 1:login 2:signup 3:EnterBirthday
-  int typeStatus = 0;
+class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
+  Widget popup;
+  int currentIndex = 0;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final bool useRootNavigator = true;
+  PageController _pageController;
+  TabController _tabController;
+
+  final List<Tab> toptabs = <Tab>[
+    Tab(
+      child: Text('Following',
+          style: TextStyle(
+              fontSize: 16.0,
+              fontFamily: 'Regular',
+              color: Color.fromRGBO(255, 255, 255, 1))),
+    ),
+    Tab(
+      child: Text('Your Vibez',
+          style: TextStyle(
+              fontSize: 16.0,
+              fontFamily: 'Regular',
+              color: Color.fromRGBO(255, 255, 255, 1))),
+    ),
+  ];
 
   @override
   void initState() {
     super.initState();
-    typeStatus = widget.typeStatus;
+    _tabController = new TabController(length: toptabs.length, vsync: this)
+      ..addListener(() {
+        if (_tabController.indexIsChanging) {
+          //判断tabBar是否切换
+          onPageChange(_tabController.index, p: _pageController);
+        }
+      });
+    _tabController.animateTo(1); //默认选项卡
+    _pageController = new PageController(initialPage: 0, keepPage: true);
+  }
+
+  void onPageChange(int index, {PageController p, TabController t}) async {}
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    _pageController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final avatar = "lib/assets/images/vibez-pattern.png";
-
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: new LinearGradient(
-              begin: Alignment.center,
-              end: Alignment.bottomCenter,
-              colors: [
-                Colors.black,
-                Color.fromRGBO(0, 89, 135, 1),
-              ]),
-          image: DecorationImage(
-            image: AssetImage(avatar),
-            fit: BoxFit.fill,
+    return DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          backgroundColor: Colors.black,
+          key: _scaffoldKey,
+          body: Stack(
+            children: <Widget>[
+              TabBarView(
+                controller: _tabController,
+                children: <Widget>[
+                  PageView(
+                    allowImplicitScrolling: true,
+                    controller: _pageController,
+                    children: <Widget>[
+                      Following(),
+                    ],
+                    onPageChanged: (int index) {
+                      setState(() {
+                        currentIndex = index;
+                      });
+                    },
+                  ),
+                  Text(
+                    'data',
+                    style: TextStyle(fontSize: 50, color: Colors.red),
+                  ),
+                ],
+              ),
+              Column(
+                children: <Widget>[
+                  AppBar(
+                    backgroundColor: Colors.transparent,
+                    elevation: 0,
+                    centerTitle: true,
+                    leading: IconButton(
+                        //导航栏最左侧Widget，常见为抽屉菜单按钮或返回按钮。
+                        icon: Icon(Icons.ac_unit),
+                        onPressed: () {
+                          print('点击了直播按钮');
+                        }),
+                    // actions: <Widget>[
+                    //   //导航栏最右侧
+                    //   //导航栏右侧菜单
+                    //   IconButton(
+                    //       icon: Icon(Icons.search),
+                    //       onPressed: () {
+                    //         print('点击了搜索按钮');
+                    //       }),
+                    // ],
+                    title: TabBar(
+                      indicator: UnderlineTabIndicator(
+                          borderSide:
+                              BorderSide(width: 2.0, color: Colors.white),
+                          insets: EdgeInsets.symmetric(horizontal: 18.0)),
+                      labelStyle: TextStyle(fontSize: 18),
+                      isScrollable: true,
+                      controller: _tabController,
+                      tabs: toptabs,
+                      onTap: (index) {
+                        print(index);
+                      },
+                    ),
+                  )
+                ],
+              ),
+            ],
           ),
-        ),
-        width: double.infinity,
-        height: double.infinity,
-        child: status == 1 || typeStatus == 1
-            ? Login(setstatus: setStatus)
-            : status == 0
-                ? homeWidget()
-                : status == 2
-                    ? Signup(setstatus: setStatus)
-                    : EnterBirthday(setstatus: setStatus),
-      ),
-    );
+          bottomNavigationBar: bottomItems(_scaffoldKey, context),
+          drawer: Container(),
+        ));
   }
 
-  static const logo = AssetImage('lib/assets/images/vibez-text-logo.png');
-
-  void setStatus(val) {
-    setState(() {
-      status = val;
-      typeStatus = val == 0 ? 0 : typeStatus; //if login page click Cancel  is 0
-    });
+  BottomNavigationBar bottomItems(
+      GlobalKey<ScaffoldState> _scaffoldKey, BuildContext context) {
+    return BottomNavigationBar(
+        backgroundColor: Colors.transparent,
+        selectedItemColor: Colors.transparent,
+        unselectedItemColor: Colors.red,
+        onTap: (int index) {
+          setState(() {
+            currentIndex = index;
+            switch (index) {
+              case 0: //home page
+                _tabController.animateTo(1); //默认推荐选项卡
+                break;
+              case 1: // shearch page
+                popup = Discover();
+                break;
+              case 2: //upload page
+                popup = Upload();
+                break;
+              case 3: //message page
+                popup = Inbox();
+                break;
+              case 4: // my page
+                popup = My();
+                break;
+            }
+          });
+          if (popup != null) {
+            if (useRootNavigator) {
+              showModalBottomSheet(
+                  useRootNavigator: useRootNavigator,
+                  context: context,
+                  isScrollControlled: true,
+                  builder: (BuildContext bc) {
+                    return Padding(
+                      padding: EdgeInsets.only(
+                          top: MediaQuery.of(context).padding.top),
+                      child: popup,
+                    );
+                  });
+            } else {
+              showModalBottomSheet(
+                  useRootNavigator: useRootNavigator,
+                  context: context,
+                  builder: (BuildContext bc) {
+                    return Padding(
+                      padding: EdgeInsets.only(
+                          top: MediaQuery.of(context).padding.top),
+                      child: popup,
+                    );
+                  });
+            }
+          }
+        },
+        elevation: 0.5,
+        currentIndex: currentIndex,
+        type: BottomNavigationBarType.fixed,
+        items: [
+          BottomNavigationBarItem(
+            icon: Image.asset('lib/assets/images/home-o.png'),
+            activeIcon: Image.asset('lib/assets/images/home.png'),
+            title: SizedBox.shrink(),
+          ),
+          BottomNavigationBarItem(
+            icon: Image.asset('lib/assets/images/discover-o.png'),
+            activeIcon: Image.asset('lib/assets/images/discover.png'),
+            title: SizedBox.shrink(),
+          ),
+          BottomNavigationBarItem(
+            icon: Image.asset('lib/assets/images/upload.png'),
+            activeIcon: Image.asset('lib/assets/images/upload.png'),
+            title: SizedBox.shrink(),
+          ),
+          BottomNavigationBarItem(
+            icon: Image.asset('lib/assets/images/inbox-o.png'),
+            activeIcon: Image.asset('lib/assets/images/inbox.png'),
+            title: SizedBox.shrink(),
+          ),
+          BottomNavigationBarItem(
+            icon: Image.asset('lib/assets/images/account-o.png'),
+            activeIcon: Image.asset('lib/assets/images/account.png'),
+            title: SizedBox.shrink(),
+          ),
+        ]);
   }
-
-  Widget homeWidget() => Padding(
-        padding: EdgeInsets.all(30.0),
-        child: Stack(children: [
-          Align(
-            alignment: Alignment.center,
-            child: Image(
-              image: logo,
-              width: 150.0,
-            ),
-          ),
-          Align(
-            alignment: FractionalOffset(0.1, .8),
-            child: Container(
-              width: double.infinity,
-              height: 50.0,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment(0.0, -1.0),
-                  end: Alignment(0.0, 1.0),
-                  colors: [
-                    Color.fromRGBO(41, 169, 224, 1),
-                    Color.fromRGBO(82, 168, 204, 1),
-                  ],
-                ),
-                borderRadius: BorderRadius.circular(30.0),
-              ),
-              child: RaisedButton(
-                child: Text(
-                  "LOG IN",
-                  style: TextStyle(
-                      color: Color.fromRGBO(255, 255, 255, 1),
-                      fontSize: 25.0,
-                      fontWeight: FontWeight.w300),
-                ),
-                color: Colors.transparent,
-                elevation: 0, // 正常时阴影隐藏
-                highlightElevation: 0, // 点击
-                onPressed: () => setStatus(1),
-              ),
-            ),
-          ),
-          Align(
-            alignment: FractionalOffset(0.1, .9),
-            child: Container(
-              width: double.infinity,
-              height: 50.0,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment(0.0, -1.0),
-                  end: Alignment(0.0, 1.0),
-                  colors: [
-                    Color.fromRGBO(255, 35, 57, 1),
-                    Color.fromRGBO(188, 0, 53, 1),
-                  ],
-                ),
-                borderRadius: BorderRadius.circular(30.0),
-              ),
-              child: RaisedButton(
-                child: Text(
-                  "SIGN UP",
-                  style: TextStyle(
-                      color: Color.fromRGBO(255, 255, 255, 1),
-                      fontSize: 25.0,
-                      fontWeight: FontWeight.w300),
-                ),
-                color: Colors.transparent,
-                elevation: 0, // 正常时阴影隐藏
-                highlightElevation: 0, // 点击
-                onPressed: () => setStatus(2),
-              ),
-            ),
-          ),
-        ]),
-      );
 }

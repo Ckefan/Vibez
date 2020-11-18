@@ -1,4 +1,4 @@
-import 'package:Vibez/pages/home/home.dart';
+import 'package:Vibez/pages/entry/entry.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_input_text_field/pin_input_text_field.dart';
 
@@ -33,7 +33,7 @@ class _ConfirmationCodeState extends State<ConfirmationCode> {
                     onTap: () => {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return Home(typeStatus: 1);
+                        return Entry(typeStatus: 1);
                       }))
                     },
                   ),
@@ -99,30 +99,21 @@ class _ConfirmationCodeState extends State<ConfirmationCode> {
                             //     color: Color.fromRGBO(112, 112, 112, 1)),
                             ),
                         child: Padding(
-                            padding: EdgeInsets.only(left: 13.0),
-                            child: PinInputTextField(
-                              autoFocus: true,
-                              pinLength: 6,
-                              decoration: UnderlineDecoration(
-                                textStyle: TextStyle(
-                                  color: Color.fromRGBO(41, 169, 224, 1),
-                                  fontSize: 15.0,
-                                ),
-                                colorBuilder: PinListenColorBuilder(
-                                    Colors.cyan, Colors.white),
+                          padding: EdgeInsets.only(left: 13.0),
+                          child: PinInputTextField(
+                            autoFocus: true,
+                            pinLength: 6,
+                            decoration: UnderlineDecoration(
+                              textStyle: TextStyle(
+                                color: Color.fromRGBO(41, 169, 224, 1),
+                                fontSize: 15.0,
                               ),
-                              onChanged: (value) => {print(value)},
-                            )
-                            //  TextField(
-                            //   autofocus: true,
-                            //   style: TextStyle(
-                            //       color: Color.fromRGBO(184, 184, 184, 1),
-                            //       fontSize: 15.0,
-                            //       wordSpacing: 20.0),
-                            //   decoration:
-                            //       InputDecoration(border: InputBorder.none),
-                            // ),
+                              colorBuilder: PinListenColorBuilder(
+                                  Colors.cyan, Colors.white),
                             ),
+                            onChanged: (value) => {print(value)},
+                          ),
+                        ),
                       ),
                     ),
                   ],

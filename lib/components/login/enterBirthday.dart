@@ -1,3 +1,4 @@
+import 'package:Vibez/pages/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
@@ -43,7 +44,7 @@ class _EnterBirthdayState extends State<EnterBirthday> {
                       showTitleActions: true,
                       minTime: DateTime(1800, 1, 1),
                       maxTime: DateTime.now(), onChanged: (date) {
-                    print('change $date');
+                    // print('change $date');
                   }, onConfirm: (date) {
                     print('confirm $date');
                     setState(() {
@@ -97,7 +98,11 @@ class _EnterBirthdayState extends State<EnterBirthday> {
             color: Colors.transparent,
             elevation: 0, // 正常时阴影隐藏
             highlightElevation: 0, // 点击
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return Home();
+              }));
+            },
           ),
         ),
         RaisedButton(
