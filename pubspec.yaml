@@ -30,9 +30,9 @@ dependencies:
   cupertino_icons: ^0.1.3
   pin_input_text_field: ^3.1.1  #短信验证码输入
   flutter_datetime_picker: ^1.4.0
-  http: ^0.12.2
-  dio: ^3.0.10
-  video_player: ^1.0.1
+  http: ^0.12.0+4
+  dio: ^3.0.9
+  video_player: ^0.10.11+1
   getflutter: ^1.0.11
 
 
