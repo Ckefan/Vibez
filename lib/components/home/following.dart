@@ -3,6 +3,8 @@ import 'dart:convert'; //编码解码库
 import 'package:Vibez/components/home/player.dart';
 import 'package:Vibez/config/api.dart';
 import 'package:Vibez/models/Vibez.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:getflutter/getflutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
@@ -25,12 +27,18 @@ class _FollowingState extends State<Following> {
     super.initState();
     pageController = PageController(initialPage: 0, keepPage: true)
       ..addListener(() {
-        print(pageController.position.extentAfter);
         if (pageController.position.pixels <
             pageController.position.maxScrollExtent) {
           //load more data
         }
       });
+    getFollow().then((value) => print('videos ${videos.length} was finished!'));
+    if (SchedulerBinding.instance.schedulerPhase ==
+        SchedulerPhase.persistentCallbacks) {
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        print('videos is loading!');
+      });
+    }
   }
 
   Future<void> getFollow() async {
@@ -40,7 +48,6 @@ class _FollowingState extends State<Following> {
       vibez.billboardData.forEach((item) {
         setState(() {
           getVideos(item).then((value) => {
-                print(value),
                 if (value == 50) {print('videos length: ${videos.length}')}
               });
         });
@@ -59,12 +66,13 @@ class _FollowingState extends State<Following> {
       var response =
           await http.get(api.video + url + "&dytk", headers: api.headers);
       VideoData videoData = VideoData.fromJson(jsonDecode(response.body));
-
       //获取无水印的视频地址
       api
           .getRedirects(videoData.itemList[0].video.playaddr.uri)
           .then((url) => {
                 url = url.replaceAll('&amp', '&'),
+                url = url.replaceAll('http', 'https'),
+                print("视频资源："+url),
                 if (url != 'error')
                   {
                     if (length == 0)
@@ -77,7 +85,9 @@ class _FollowingState extends State<Following> {
                     videos.add(VideoItem(data: videoData, videourl: url))
                   }
               })
-          .whenComplete(() => {length++});
+          .whenComplete(() => {
+                length++,
+              });
     } catch (err) {
       print(err);
     }
@@ -89,10 +99,17 @@ class _FollowingState extends State<Following> {
         scrollDirection: Axis.vertical,
         controller: pageController,
         children: videos.length == 0
-            ? [
+            ? <Widget>[
                 Container(
                   color: Colors.black,
-                  child: Text('加载中'),
+                  child: Center(
+                    child: GFLoader(
+                      type: GFLoaderType.circle,
+                      loaderColorOne: Colors.blueAccent,
+                      loaderColorTwo: Colors.white,
+                      loaderColorThree: Colors.pink,
+                    ),
+                  ),
                 )
               ]
             : videos);
@@ -113,10 +130,11 @@ class _VideoItemState extends State<VideoItem> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
-        children: <Widget>[
-          VideoPlayer(
+        children: [
+          VideoPlayerWidget(
             url: widget.videourl,
           ),
+          Text('data')
           //title(),
           // VideoDescription(
           //   description: widget.data.itemList[0].desc,

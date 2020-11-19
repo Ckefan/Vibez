@@ -2,20 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:getflutter/getflutter.dart';
 import 'package:video_player/video_player.dart';
 
-class VideoPlayer extends StatefulWidget {
+class VideoPlayerWidget extends StatefulWidget {
   final url;
-  VideoPlayer({Key key, this.url});
+  VideoPlayerWidget({Key key, this.url}) : super(key: key);
   @override
-  _VideoPlayerState createState() => _VideoPlayerState();
+  _VideoPlayerWidgetState createState() => _VideoPlayerWidgetState();
 }
 
-class _VideoPlayerState extends State<VideoPlayer> {
+class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   VideoPlayerController _controller;
+
   @override
   void initState() {
     super.initState();
     _controller = VideoPlayerController.network(widget.url)
       ..initialize().then((_) => {
+            print("进入了controller"),
             setState(() {
               _controller.play();
               _controller.setLooping(true);
@@ -37,7 +39,6 @@ class _VideoPlayerState extends State<VideoPlayer> {
         child: _controller.value.initialized
             ? GestureDetector(
                 onTap: () {
-                  print(_controller.value.aspectRatio);
                   if (_controller.value.isPlaying) {
                     _controller.pause();
                   } else {
@@ -47,7 +48,7 @@ class _VideoPlayerState extends State<VideoPlayer> {
                 child: AspectRatio(
                   aspectRatio: 0.656, //_controller.value.aspectRatio,
                   child: VideoPlayer(
-                    url: _controller,
+                    _controller,
                   ),
                 ),
               )

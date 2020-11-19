@@ -9,7 +9,7 @@ class RequestController {
   String video =
       "https://www.iesdouyin.com/web/api/v2/aweme/iteminfo/?item_ids=";
 
-  String player = "https://aweme.snssdk.com/aweme/v1/play/?video_id=";
+  String player = "https://aweme.snssdk.com/aweme/v1/playwm/?video_id=";
 
   Future<String> getVideos() async {
     try {

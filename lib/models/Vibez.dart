@@ -8,9 +8,9 @@ class Vibez {
   Vibez.fromJson(Map<String, dynamic> json) {
     statusCode = json['statusCode'];
     statusMsg = json['statusMsg'];
-    if (json['billboardData'] != null) {
+    if (json['billboard_data'] != null) {
       billboardData = new List<BillboardData>();
-      json['billboardData'].forEach((v) {
+      json['billboard_data'].forEach((v) {
         billboardData.add(BillboardData.fromJson(v));
       });
     }

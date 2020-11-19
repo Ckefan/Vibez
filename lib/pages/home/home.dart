@@ -46,7 +46,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           onPageChange(_tabController.index, p: _pageController);
         }
       });
-    _tabController.animateTo(1); //默认选项卡
+    _tabController.animateTo(0); //默认选项卡
     _pageController = new PageController(initialPage: 0, keepPage: true);
   }
 
@@ -62,75 +62,90 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-        length: 2,
-        child: Scaffold(
-          backgroundColor: Colors.black,
-          key: _scaffoldKey,
-          body: Stack(
-            children: <Widget>[
-              TabBarView(
-                controller: _tabController,
-                children: <Widget>[
-                  PageView(
-                    allowImplicitScrolling: true,
-                    controller: _pageController,
-                    children: <Widget>[
-                      Following(),
-                    ],
-                    onPageChanged: (int index) {
-                      setState(() {
-                        currentIndex = index;
-                      });
+      length: 2,
+      child: Scaffold(
+        backgroundColor: Colors.black,
+        key: _scaffoldKey,
+        body: Stack(
+          children: <Widget>[
+            TabBarView(
+              controller: _tabController,
+              children: <Widget>[
+                PageView(
+                  allowImplicitScrolling: true,
+                  controller: _pageController,
+                  children: <Widget>[
+                    Following(),
+                  ],
+                  onPageChanged: (int index) {
+                    setState(() {
+                      currentIndex = index;
+                    });
+                  },
+                ),
+                Container(
+                  width: double.infinity,
+                  height: double.infinity,
+                  color: Colors.red,
+                  child: Text(
+                    'data',
+                    style: TextStyle(fontSize: 50, color: Colors.white),
+                  ),
+                ),
+              ],
+            ),
+            Column(
+              children: <Widget>[
+                AppBar(
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  centerTitle: true,
+                  leading: IconButton(
+                      //导航栏最左侧Widget，常见为抽屉菜单按钮或返回按钮。
+                      icon: Icon(Icons.ac_unit),
+                      onPressed: () {
+                        print('点击了直播按钮');
+                      }),
+                  // actions: <Widget>[
+                  //   //导航栏最右侧
+                  //   //导航栏右侧菜单
+                  //   IconButton(
+                  //       icon: Icon(Icons.search),
+                  //       onPressed: () {
+                  //         print('点击了搜索按钮');
+                  //       }),
+                  // ],
+                  title: TabBar(
+                    indicator: UnderlineTabIndicator(
+                        borderSide: BorderSide(width: 2.0, color: Colors.white),
+                        insets: EdgeInsets.symmetric(horizontal: 18.0)),
+                    labelStyle: TextStyle(fontSize: 18),
+                    isScrollable: true,
+                    controller: _tabController,
+                    tabs: toptabs,
+                    onTap: (index) {
+                      print(index);
                     },
                   ),
-                  Text(
-                    'data',
-                    style: TextStyle(fontSize: 50, color: Colors.red),
-                  ),
-                ],
-              ),
-              Column(
-                children: <Widget>[
-                  AppBar(
-                    backgroundColor: Colors.transparent,
-                    elevation: 0,
-                    centerTitle: true,
-                    leading: IconButton(
-                        //导航栏最左侧Widget，常见为抽屉菜单按钮或返回按钮。
-                        icon: Icon(Icons.ac_unit),
-                        onPressed: () {
-                          print('点击了直播按钮');
-                        }),
-                    // actions: <Widget>[
-                    //   //导航栏最右侧
-                    //   //导航栏右侧菜单
-                    //   IconButton(
-                    //       icon: Icon(Icons.search),
-                    //       onPressed: () {
-                    //         print('点击了搜索按钮');
-                    //       }),
-                    // ],
-                    title: TabBar(
-                      indicator: UnderlineTabIndicator(
-                          borderSide:
-                              BorderSide(width: 2.0, color: Colors.white),
-                          insets: EdgeInsets.symmetric(horizontal: 18.0)),
-                      labelStyle: TextStyle(fontSize: 18),
-                      isScrollable: true,
-                      controller: _tabController,
-                      tabs: toptabs,
-                      onTap: (index) {
-                        print(index);
-                      },
-                    ),
-                  )
-                ],
-              ),
-            ],
-          ),
-          bottomNavigationBar: bottomItems(_scaffoldKey, context),
-          drawer: Container(),
-        ));
+                )
+              ],
+            ),
+          ],
+        ),
+        bottomNavigationBar: new Theme(
+            data: Theme.of(context).copyWith(
+                //设置背景色`BottomNavigationBar`
+                canvasColor: Colors.green,
+                //设置高亮文字颜色
+                // primaryColor: Colors.red,
+                //设置一般文字颜色
+                textTheme: Theme.of(context)
+                    .textTheme
+                    .copyWith(caption: new TextStyle(color: Colors.yellow))),
+            child: bottomItems(_scaffoldKey, context)),
+        drawer: Container(),
+      ),
+    );
   }
 
   BottomNavigationBar bottomItems(
@@ -138,13 +153,13 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     return BottomNavigationBar(
         backgroundColor: Colors.transparent,
         selectedItemColor: Colors.transparent,
-        unselectedItemColor: Colors.red,
+        unselectedItemColor: Colors.transparent,
         onTap: (int index) {
           setState(() {
             currentIndex = index;
             switch (index) {
               case 0: //home page
-                _tabController.animateTo(1); //默认推荐选项卡
+                _tabController.animateTo(0); //默认推荐选项卡
                 break;
               case 1: // shearch page
                 popup = Discover();
