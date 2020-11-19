@@ -64,7 +64,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        backgroundColor: Colors.black,
         key: _scaffoldKey,
         body: Stack(
           children: <Widget>[
@@ -130,20 +129,29 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 )
               ],
             ),
+            new Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                height: 80.0,
+                child: new Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Image.asset('lib/assets/images/home-o.png'),
+                    Image.asset('lib/assets/images/discover-o.png'),
+                    Image.asset('lib/assets/images/upload.png'),
+                    Image.asset('lib/assets/images/inbox-o.png'),
+                    Image.asset('lib/assets/images/account-o.png'),
+                  ],
+                ),
+              ),
+            )
           ],
         ),
-        bottomNavigationBar: new Theme(
-            data: Theme.of(context).copyWith(
-                //设置背景色`BottomNavigationBar`
-                canvasColor: Colors.green,
-                //设置高亮文字颜色
-                // primaryColor: Colors.red,
-                //设置一般文字颜色
-                textTheme: Theme.of(context)
-                    .textTheme
-                    .copyWith(caption: new TextStyle(color: Colors.yellow))),
-            child: bottomItems(_scaffoldKey, context)),
-        drawer: Container(),
+        // bottomNavigationBar: Theme(
+        //     data: Theme.of(context).copyWith(canvasColor: Colors.transparent),
+        //     child: bottomItems(_scaffoldKey, context)),
+        // drawer: Container(),
       ),
     );
   }
@@ -151,9 +159,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   BottomNavigationBar bottomItems(
       GlobalKey<ScaffoldState> _scaffoldKey, BuildContext context) {
     return BottomNavigationBar(
-        backgroundColor: Colors.transparent,
-        selectedItemColor: Colors.transparent,
-        unselectedItemColor: Colors.transparent,
         onTap: (int index) {
           setState(() {
             currentIndex = index;
@@ -202,7 +207,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             }
           }
         },
-        elevation: 0.5,
+        elevation: 0,
         currentIndex: currentIndex,
         type: BottomNavigationBarType.fixed,
         items: [

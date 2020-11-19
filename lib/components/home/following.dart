@@ -97,6 +97,7 @@ class _FollowingState extends State<Following> {
   Widget build(BuildContext context) {
     return PageView(
         scrollDirection: Axis.vertical,
+        
         controller: pageController,
         children: videos.length == 0
             ? <Widget>[

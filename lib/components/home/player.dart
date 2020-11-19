@@ -34,6 +34,8 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
+        width: double.infinity,
+        height: double.infinity,
         alignment: Alignment.center,
         color: Colors.black,
         child: _controller.value.initialized
@@ -46,7 +48,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                   }
                 },
                 child: AspectRatio(
-                  aspectRatio: 0.656, //_controller.value.aspectRatio,
+                  aspectRatio: MediaQuery.of(context).size.width/MediaQuery.of(context).size.height,//0.656, //_controller.value.aspectRatio,
                   child: VideoPlayer(
                     _controller,
                   ),
