@@ -59,6 +59,74 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     super.dispose();
   }
 
+  List<Widget> getTabList() {
+    final List tabList = [
+      {
+        'icon': 'lib/assets/images/home.png',
+        'actionIcon': 'lib/assets/images/home-o.png',
+      },
+      {
+        'icon': 'lib/assets/images/discover.png',
+        'actionIcon': 'lib/assets/images/discover-o.png',
+      },
+      {
+        'icon': 'lib/assets/images/upload.png',
+        'actionIcon': 'lib/assets/images/upload.png',
+      },
+      {
+        'icon': 'lib/assets/images/inbox.png',
+        'actionIcon': 'lib/assets/images/inbox-o.png',
+      },
+      {
+        'icon': 'lib/assets/images/account.png',
+        'actionIcon': 'lib/assets/images/account-o.png',
+      }
+    ];
+    List<Widget> childs = [];
+    for (var i = 0; i < tabList.length; i++) {
+      childs.add(
+        GestureDetector(
+          onTap: () => {
+            setState(() {
+              currentIndex = i;
+              switch (i) {
+                case 0: //home page
+                  _tabController.animateTo(0); //默认推荐选项卡
+                  break;
+                case 1: // shearch page
+                  popup = Discover();
+                  break;
+                case 2: //upload page
+                  popup = Upload();
+                  break;
+                case 3: //message page
+                  popup = Inbox();
+                  break;
+                case 4: // my page
+                  popup = My();
+                  break;
+              }
+            })
+          },
+          child: i == 2
+              ? Padding(
+                  padding: EdgeInsets.only(bottom: 15.0),
+                  child: Image.asset(
+                    tabList[i]['icon'],
+                    width: MediaQuery.of(context).size.width / 100 * 12,
+                  ),
+                )
+              : Image.asset(
+                  currentIndex == i
+                      ? tabList[i]['actionIcon']
+                      : tabList[i]['icon'],
+                  width: MediaQuery.of(context).size.width / 100 * 8),
+        ),
+      );
+    }
+    return childs;
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -133,16 +201,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               alignment: Alignment.bottomCenter,
               child: Container(
                 height: 80.0,
-                child: new Row(
+                child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Image.asset('lib/assets/images/home-o.png'),
-                    Image.asset('lib/assets/images/discover-o.png'),
-                    Image.asset('lib/assets/images/upload.png'),
-                    Image.asset('lib/assets/images/inbox-o.png'),
-                    Image.asset('lib/assets/images/account-o.png'),
-                  ],
+                  children: getTabList(), //自定义BottomNavigationBar
                 ),
               ),
             )
@@ -156,86 +218,86 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     );
   }
 
-  BottomNavigationBar bottomItems(
-      GlobalKey<ScaffoldState> _scaffoldKey, BuildContext context) {
-    return BottomNavigationBar(
-        onTap: (int index) {
-          setState(() {
-            currentIndex = index;
-            switch (index) {
-              case 0: //home page
-                _tabController.animateTo(0); //默认推荐选项卡
-                break;
-              case 1: // shearch page
-                popup = Discover();
-                break;
-              case 2: //upload page
-                popup = Upload();
-                break;
-              case 3: //message page
-                popup = Inbox();
-                break;
-              case 4: // my page
-                popup = My();
-                break;
-            }
-          });
-          if (popup != null) {
-            if (useRootNavigator) {
-              showModalBottomSheet(
-                  useRootNavigator: useRootNavigator,
-                  context: context,
-                  isScrollControlled: true,
-                  builder: (BuildContext bc) {
-                    return Padding(
-                      padding: EdgeInsets.only(
-                          top: MediaQuery.of(context).padding.top),
-                      child: popup,
-                    );
-                  });
-            } else {
-              showModalBottomSheet(
-                  useRootNavigator: useRootNavigator,
-                  context: context,
-                  builder: (BuildContext bc) {
-                    return Padding(
-                      padding: EdgeInsets.only(
-                          top: MediaQuery.of(context).padding.top),
-                      child: popup,
-                    );
-                  });
-            }
-          }
-        },
-        elevation: 0,
-        currentIndex: currentIndex,
-        type: BottomNavigationBarType.fixed,
-        items: [
-          BottomNavigationBarItem(
-            icon: Image.asset('lib/assets/images/home-o.png'),
-            activeIcon: Image.asset('lib/assets/images/home.png'),
-            title: SizedBox.shrink(),
-          ),
-          BottomNavigationBarItem(
-            icon: Image.asset('lib/assets/images/discover-o.png'),
-            activeIcon: Image.asset('lib/assets/images/discover.png'),
-            title: SizedBox.shrink(),
-          ),
-          BottomNavigationBarItem(
-            icon: Image.asset('lib/assets/images/upload.png'),
-            activeIcon: Image.asset('lib/assets/images/upload.png'),
-            title: SizedBox.shrink(),
-          ),
-          BottomNavigationBarItem(
-            icon: Image.asset('lib/assets/images/inbox-o.png'),
-            activeIcon: Image.asset('lib/assets/images/inbox.png'),
-            title: SizedBox.shrink(),
-          ),
-          BottomNavigationBarItem(
-            icon: Image.asset('lib/assets/images/account-o.png'),
-            activeIcon: Image.asset('lib/assets/images/account.png'),
-            title: SizedBox.shrink(),
-          ),
-        ]);
-  }
+  // BottomNavigationBar bottomItems(
+  //     GlobalKey<ScaffoldState> _scaffoldKey, BuildContext context) {
+  //   return BottomNavigationBar(
+  //       onTap: (int index) {
+  //         setState(() {
+  //           currentIndex = index;
+  //           switch (index) {
+  //             case 0: //home page
+  //               _tabController.animateTo(0); //默认推荐选项卡
+  //               break;
+  //             case 1: // shearch page
+  //               popup = Discover();
+  //               break;
+  //             case 2: //upload page
+  //               popup = Upload();
+  //               break;
+  //             case 3: //message page
+  //               popup = Inbox();
+  //               break;
+  //             case 4: // my page
+  //               popup = My();
+  //               break;
+  //           }
+  //         });
+  //         if (popup != null) {
+  //           if (useRootNavigator) {
+  //             showModalBottomSheet(
+  //                 useRootNavigator: useRootNavigator,
+  //                 context: context,
+  //                 isScrollControlled: true,
+  //                 builder: (BuildContext bc) {
+  //                   return Padding(
+  //                     padding: EdgeInsets.only(
+  //                         top: MediaQuery.of(context).padding.top),
+  //                     child: popup,
+  //                   );
+  //                 });
+  //           } else {
+  //             showModalBottomSheet(
+  //                 useRootNavigator: useRootNavigator,
+  //                 context: context,
+  //                 builder: (BuildContext bc) {
+  //                   return Padding(
+  //                     padding: EdgeInsets.only(
+  //                         top: MediaQuery.of(context).padding.top),
+  //                     child: popup,
+  //                   );
+  //                 });
+  //           }
+  //         }
+  //       },
+  //       elevation: 0,
+  //       currentIndex: currentIndex,
+  //       type: BottomNavigationBarType.fixed,
+  //       items: [
+  //         BottomNavigationBarItem(
+  //           icon: Image.asset('lib/assets/images/home-o.png'),
+  //           activeIcon: Image.asset('lib/assets/images/home.png'),
+  //           title: SizedBox.shrink(),
+  //         ),
+  //         BottomNavigationBarItem(
+  //           icon: Image.asset('lib/assets/images/discover-o.png'),
+  //           activeIcon: Image.asset('lib/assets/images/discover.png'),
+  //           title: SizedBox.shrink(),
+  //         ),
+  //         BottomNavigationBarItem(
+  //           icon: Image.asset('lib/assets/images/upload.png'),
+  //           activeIcon: Image.asset('lib/assets/images/upload.png'),
+  //           title: SizedBox.shrink(),
+  //         ),
+  //         BottomNavigationBarItem(
+  //           icon: Image.asset('lib/assets/images/inbox-o.png'),
+  //           activeIcon: Image.asset('lib/assets/images/inbox.png'),
+  //           title: SizedBox.shrink(),
+  //         ),
+  //         BottomNavigationBarItem(
+  //           icon: Image.asset('lib/assets/images/account-o.png'),
+  //           activeIcon: Image.asset('lib/assets/images/account.png'),
+  //           title: SizedBox.shrink(),
+  //         ),
+  //       ]);
+  // }
 }

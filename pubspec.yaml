@@ -35,7 +35,6 @@ dependencies:
   video_player: ^0.10.11+1
   getflutter: ^1.0.11
 
-
 dev_dependencies:
   flutter_test:
     sdk: flutter

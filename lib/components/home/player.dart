@@ -48,7 +48,8 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                   }
                 },
                 child: AspectRatio(
-                  aspectRatio: MediaQuery.of(context).size.width/MediaQuery.of(context).size.height,//0.656, //_controller.value.aspectRatio,
+                  aspectRatio: _controller.value
+                      .aspectRatio, //MediaQuery.of(context).size.width/MediaQuery.of(context).size.height,//0.656, //_controller.value.aspectRatio,
                   child: VideoPlayer(
                     _controller,
                   ),
