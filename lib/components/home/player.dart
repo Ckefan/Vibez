@@ -33,6 +33,8 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
 
   @override
   Widget build(BuildContext context) {
+    print(_controller.value.initialized);
+    print("------------------------------------");
     return Container(
         width: double.infinity,
         height: double.infinity,

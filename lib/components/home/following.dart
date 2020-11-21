@@ -1,6 +1,7 @@
 import 'dart:convert'; //编码解码库
 
 import 'package:Vibez/components/home/player.dart';
+import 'package:Vibez/components/home/video_description.dart';
 import 'package:Vibez/config/api.dart';
 import 'package:Vibez/models/Vibez.dart';
 import 'package:flutter/scheduler.dart';
@@ -72,7 +73,7 @@ class _FollowingState extends State<Following> {
           .then((url) => {
                 url = url.replaceAll('&amp', '&'),
                 url = url.replaceAll('http', 'https'),
-                print("视频资源："+url),
+                print("视频资源：" + url),
                 if (url != 'error')
                   {
                     if (length == 0)
@@ -97,7 +98,6 @@ class _FollowingState extends State<Following> {
   Widget build(BuildContext context) {
     return PageView(
         scrollDirection: Axis.vertical,
-        
         controller: pageController,
         children: videos.length == 0
             ? <Widget>[
@@ -135,14 +135,13 @@ class _VideoItemState extends State<VideoItem> {
           VideoPlayerWidget(
             url: widget.videourl,
           ),
-          Text('data')
           //title(),
-          // VideoDescription(
-          //   description: widget.data.itemList[0].desc,
-          //   musicName: widget.data.itemList[0].music.title,
-          //   authorName: widget.data.itemList[0].music.author,
-          //   userName: widget.data.itemList[0].author.nickname,
-          // ),
+          VideoDescription(
+            description: widget.data.itemList[0].desc,
+            musicName: widget.data.itemList[0].music.title,
+            authorName: widget.data.itemList[0].music.author,
+            userName: widget.data.itemList[0].author.nickname,
+          ),
           // ActionsToolbar(
           //   comments:
           //       widget.data.itemList[0].statistics.commentCount.toString(),

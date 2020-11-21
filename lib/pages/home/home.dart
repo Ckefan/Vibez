@@ -62,24 +62,24 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   List<Widget> getTabList() {
     final List tabList = [
       {
-        'icon': 'lib/assets/images/home.png',
-        'actionIcon': 'lib/assets/images/home-o.png',
+        'icon': 'lib/assets/images/home-o.png',
+        'actionIcon': 'lib/assets/images/home.png',
       },
       {
-        'icon': 'lib/assets/images/discover.png',
-        'actionIcon': 'lib/assets/images/discover-o.png',
+        'icon': 'lib/assets/images/discover-o.png',
+        'actionIcon': 'lib/assets/images/discover.png',
       },
       {
         'icon': 'lib/assets/images/upload.png',
         'actionIcon': 'lib/assets/images/upload.png',
       },
       {
-        'icon': 'lib/assets/images/inbox.png',
-        'actionIcon': 'lib/assets/images/inbox-o.png',
+        'icon': 'lib/assets/images/inbox-o.png',
+        'actionIcon': 'lib/assets/images/inbox.png',
       },
       {
-        'icon': 'lib/assets/images/account.png',
-        'actionIcon': 'lib/assets/images/account-o.png',
+        'icon': 'lib/assets/images/account-o.png',
+        'actionIcon': 'lib/assets/images/account.png',
       }
     ];
     List<Widget> childs = [];
@@ -200,10 +200,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             new Align(
               alignment: Alignment.bottomCenter,
               child: Container(
-                height: 80.0,
+                height: 70.0,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: getTabList(), //自定义BottomNavigationBar
                 ),
               ),
