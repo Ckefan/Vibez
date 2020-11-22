@@ -8,6 +8,11 @@ class Discover extends StatefulWidget {
 class _DiscoverState extends State<Discover> {
   @override
   Widget build(BuildContext context) {
-    return Text("Discover page");
+    return Container(
+      width: double.infinity,
+      height: double.infinity ,
+      color: Colors.red,
+      child: Text("Discover page"),
+    );
   }
 }

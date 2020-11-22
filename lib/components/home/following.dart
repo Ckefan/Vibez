@@ -10,6 +10,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
 class Following extends StatefulWidget {
+  Following({Key key});
   @override
   _FollowingState createState() => _FollowingState();
 }
@@ -96,6 +97,8 @@ class _FollowingState extends State<Following> {
 
   @override
   Widget build(BuildContext context) {
+    print(videos.length);
+    print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%');
     return PageView(
         scrollDirection: Axis.vertical,
         controller: pageController,

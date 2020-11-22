@@ -4,6 +4,7 @@ import 'package:Vibez/pages/inbox/inbox.dart';
 import 'package:Vibez/pages/my/my.dart';
 import 'package:Vibez/pages/upload/upload.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   const Home({Key key}) : super(key: key);
@@ -86,41 +87,26 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     for (var i = 0; i < tabList.length; i++) {
       childs.add(
         GestureDetector(
+          behavior: HitTestBehavior.opaque,
           onTap: () => {
             setState(() {
               currentIndex = i;
-              switch (i) {
-                case 0: //home page
-                  _tabController.animateTo(0); //默认推荐选项卡
-                  break;
-                case 1: // shearch page
-                  popup = Discover();
-                  break;
-                case 2: //upload page
-                  popup = Upload();
-                  break;
-                case 3: //message page
-                  popup = Inbox();
-                  break;
-                case 4: // my page
-                  popup = My();
-                  break;
-              }
-            })
+              if (i == 0) {
+                _tabController.animateTo(0);
+              } else {}
+            }),
           },
-          child: i == 2
-              ? Padding(
-                  padding: EdgeInsets.only(bottom: 15.0),
-                  child: Image.asset(
-                    tabList[i]['icon'],
-                    width: MediaQuery.of(context).size.width / 100 * 12,
-                  ),
-                )
-              : Image.asset(
-                  currentIndex == i
-                      ? tabList[i]['actionIcon']
-                      : tabList[i]['icon'],
-                  width: MediaQuery.of(context).size.width / 100 * 8),
+          child: Container(
+            width: MediaQuery.of(context).size.width / 100 * 20,
+            padding: i == 2
+                ? EdgeInsets.only(top: 2.0, right: 8.0, left: 8.0, bottom: 14.0)
+                : EdgeInsets.all(20.0),
+            child: Image.asset(
+              currentIndex == i && i != 2
+                  ? tabList[i]['actionIcon']
+                  : tabList[i]['icon'],
+            ),
+          ),
         ),
       );
     }
@@ -134,7 +120,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       child: Scaffold(
         key: _scaffoldKey,
         body: Stack(
-          children: <Widget>[
+          children: [
             TabBarView(
               controller: _tabController,
               children: <Widget>[
@@ -197,6 +183,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 )
               ],
             ),
+            [SizedBox(), Discover(), Upload(), Inbox(), DiyApp()][currentIndex],
             new Align(
               alignment: Alignment.bottomCenter,
               child: Container(
@@ -210,94 +197,68 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             )
           ],
         ),
-        // bottomNavigationBar: Theme(
-        //     data: Theme.of(context).copyWith(canvasColor: Colors.transparent),
-        //     child: bottomItems(_scaffoldKey, context)),
-        // drawer: Container(),
       ),
     );
   }
+}
 
-  // BottomNavigationBar bottomItems(
-  //     GlobalKey<ScaffoldState> _scaffoldKey, BuildContext context) {
-  //   return BottomNavigationBar(
-  //       onTap: (int index) {
-  //         setState(() {
-  //           currentIndex = index;
-  //           switch (index) {
-  //             case 0: //home page
-  //               _tabController.animateTo(0); //默认推荐选项卡
-  //               break;
-  //             case 1: // shearch page
-  //               popup = Discover();
-  //               break;
-  //             case 2: //upload page
-  //               popup = Upload();
-  //               break;
-  //             case 3: //message page
-  //               popup = Inbox();
-  //               break;
-  //             case 4: // my page
-  //               popup = My();
-  //               break;
-  //           }
-  //         });
-  //         if (popup != null) {
-  //           if (useRootNavigator) {
-  //             showModalBottomSheet(
-  //                 useRootNavigator: useRootNavigator,
-  //                 context: context,
-  //                 isScrollControlled: true,
-  //                 builder: (BuildContext bc) {
-  //                   return Padding(
-  //                     padding: EdgeInsets.only(
-  //                         top: MediaQuery.of(context).padding.top),
-  //                     child: popup,
-  //                   );
-  //                 });
-  //           } else {
-  //             showModalBottomSheet(
-  //                 useRootNavigator: useRootNavigator,
-  //                 context: context,
-  //                 builder: (BuildContext bc) {
-  //                   return Padding(
-  //                     padding: EdgeInsets.only(
-  //                         top: MediaQuery.of(context).padding.top),
-  //                     child: popup,
-  //                   );
-  //                 });
-  //           }
-  //         }
-  //       },
-  //       elevation: 0,
-  //       currentIndex: currentIndex,
-  //       type: BottomNavigationBarType.fixed,
-  //       items: [
-  //         BottomNavigationBarItem(
-  //           icon: Image.asset('lib/assets/images/home-o.png'),
-  //           activeIcon: Image.asset('lib/assets/images/home.png'),
-  //           title: SizedBox.shrink(),
-  //         ),
-  //         BottomNavigationBarItem(
-  //           icon: Image.asset('lib/assets/images/discover-o.png'),
-  //           activeIcon: Image.asset('lib/assets/images/discover.png'),
-  //           title: SizedBox.shrink(),
-  //         ),
-  //         BottomNavigationBarItem(
-  //           icon: Image.asset('lib/assets/images/upload.png'),
-  //           activeIcon: Image.asset('lib/assets/images/upload.png'),
-  //           title: SizedBox.shrink(),
-  //         ),
-  //         BottomNavigationBarItem(
-  //           icon: Image.asset('lib/assets/images/inbox-o.png'),
-  //           activeIcon: Image.asset('lib/assets/images/inbox.png'),
-  //           title: SizedBox.shrink(),
-  //         ),
-  //         BottomNavigationBarItem(
-  //           icon: Image.asset('lib/assets/images/account-o.png'),
-  //           activeIcon: Image.asset('lib/assets/images/account.png'),
-  //           title: SizedBox.shrink(),
-  //         ),
-  //       ]);
-  // }
+class DiyApp extends StatefulWidget {
+  @override
+  _DiyAppState createState() => _DiyAppState();
+}
+
+class _DiyAppState extends State<DiyApp> {
+  @override
+  Widget build(BuildContext context) {
+    //创建widget 持有CounterNotifier 数据
+    return ChangeNotifierProvider.value(
+      value: CounterNotifier(),
+      child: ProvidePage(),
+    );
+  }
+}
+
+class ProvidePage extends StatefulWidget {
+  final String title;
+
+  ProvidePage({Key key, this.title}) : super(key: key);
+
+  @override
+  _ProvidePageState createState() => _ProvidePageState();
+}
+
+class _ProvidePageState extends State<ProvidePage> {
+  @override
+  Widget build(BuildContext context) {
+    final counter = Provider.of<CounterNotifier>(context);
+
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text("按钮"),
+          Text("${counter.count}"),
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () {
+              counter.increment();
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+//核心：继承自ChangeNotifier
+//这种文件本来应该单独放在一个类文件的
+class CounterNotifier with ChangeNotifier {
+  int _count = 0;
+  int get count => _count;
+  increment() {
+    _count++;
+    //核心方法，， 通知刷新UI,调用build方法
+    notifyListeners();
+  }
 }

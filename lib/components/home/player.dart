@@ -25,6 +25,14 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
           });
   }
 
+  void pause() {
+    _controller.pause();
+  }
+
+  void play() {
+    _controller.play();
+  }
+
   @override
   void dispose() {
     super.dispose();
