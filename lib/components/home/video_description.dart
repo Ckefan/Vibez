@@ -31,6 +31,57 @@ class _VideoDescriptionState extends State<VideoDescription> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
+              width: 120.0,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    children: [
+                      Container(
+                        width: 25.7,
+                        height: 22.5,
+                        margin: EdgeInsets.only(bottom: 7.0),
+                        child: Image.asset('lib//assets/images/link.png'),
+                      ),
+                      Text(
+                        '12k',
+                        style: TextStyle(color: Colors.white),
+                      )
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Container(
+                        width: 28.4,
+                        height: 22.5,
+                        margin: EdgeInsets.only(bottom: 7.0),
+                        child:
+                            Image.asset('lib//assets/images/inbox-video.png'),
+                      ),
+                      Text(
+                        '12k',
+                        style: TextStyle(color: Colors.white),
+                      )
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Container(
+                        width: 27.1,
+                        height: 22.5,
+                        margin: EdgeInsets.only(bottom: 7.0),
+                        child: Image.asset('lib//assets/images/share.png'),
+                      ),
+                      Text(
+                        '12k',
+                        style: TextStyle(color: Colors.white),
+                      )
+                    ],
+                  )
+                ],
+              ),
+            ),
+            Container(
               padding: EdgeInsets.only(bottom: 5.0),
               child: Text(
                 '@${widget.userName}',

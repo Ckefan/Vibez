@@ -66,6 +66,10 @@ flutter:
     - lib/assets/images/vibez-text-logo.png
     - lib/assets/images/share.png
     - lib/assets/images/link.png
+    - lib/assets/images/inbox-video.png
+    - lib/assets/images/play.png
+    - lib/assets/images/vibez-logo.png
+   
     
    
 

@@ -49,21 +49,51 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
         alignment: Alignment.center,
         color: Colors.black,
         child: _controller.value.initialized
-            ? GestureDetector(
-                onTap: () {
-                  if (_controller.value.isPlaying) {
-                    _controller.pause();
-                  } else {
-                    _controller.play();
-                  }
-                },
-                child: AspectRatio(
-                  aspectRatio: _controller.value
-                      .aspectRatio, //MediaQuery.of(context).size.width/MediaQuery.of(context).size.height,//0.656, //_controller.value.aspectRatio,
-                  child: VideoPlayer(
-                    _controller,
+            ? Stack(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      if (_controller.value.isPlaying) {
+                        setState(() {
+                          _controller.pause();
+                        });
+                      } else {
+                        setState(() {
+                          _controller.play();
+                        });
+                      }
+                    },
+                    child: AspectRatio(
+                      aspectRatio: _controller.value
+                          .aspectRatio, //MediaQuery.of(context).size.width/MediaQuery.of(context).size.height,//0.656, //_controller.value.aspectRatio,
+                      child: VideoPlayer(
+                        _controller,
+                      ),
+                    ),
                   ),
-                ),
+                  !_controller.value.isPlaying
+                      ? GestureDetector(
+                          onTap: () {
+                            if (_controller.value.isPlaying) {
+                              setState(() {
+                                _controller.pause();
+                              });
+                            } else {
+                              setState(() {
+                                _controller.play();
+                              });
+                            }
+                          },
+                          child: Center(
+                            child: Image.asset(
+                              'lib//assets/images/play.png',
+                              width: 80,
+                              height: 80,
+                            ),
+                          ),
+                        )
+                      : SizedBox(),
+                ],
               )
             : loadingVideo());
   }

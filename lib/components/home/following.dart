@@ -21,7 +21,6 @@ class _FollowingState extends State<Following> {
 
   List<Widget> videos = [];
   VideoItem firstItem;
-  bool isloaded = false;
   int length = 0;
 
   @override
@@ -47,22 +46,22 @@ class _FollowingState extends State<Following> {
     try {
       var response = await http.get(api.url, headers: api.headers);
       Vibez vibez = Vibez.fromJson(jsonDecode(response.body));
+      print(api.url);
+      print('api.url');
+
       vibez.billboardData.forEach((item) {
-        setState(() {
-          getVideos(item).then((value) => {
-                if (value == 50) {print('videos length: ${videos.length}')}
-              });
-        });
-      });
-      setState(() {
-        isloaded = true;
+        getVideos(item).then(
+          (value) => {
+            // print('videos length: ${videos.length}'),
+          },
+        );
       });
     } catch (err) {
       print(err);
     }
   }
 
-  Future getVideos(BillboardData v) async {
+  Future<int> getVideos(BillboardData v) async {
     try {
       var url = v.link.split('/')[5];
       var response =
@@ -75,14 +74,17 @@ class _FollowingState extends State<Following> {
                 url = url.replaceAll('&amp', '&'),
                 url = url.replaceAll('http', 'https'),
                 print("视频资源：" + url),
+                print('videos length: ${videos.length}'),
                 if (url != 'error')
                   {
-                    if (length == 0)
+                    if (length == 48)
                       {
-                        firstItem = new VideoItem(
-                          data: videoData,
-                          videourl: url,
-                        )
+                        setState(() {
+                          firstItem = new VideoItem(
+                            data: videoData,
+                            videourl: url,
+                          );
+                        })
                       },
                     videos.add(VideoItem(data: videoData, videourl: url))
                   }
@@ -93,6 +95,7 @@ class _FollowingState extends State<Following> {
     } catch (err) {
       print(err);
     }
+    return length;
   }
 
   @override

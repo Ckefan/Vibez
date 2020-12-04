@@ -155,7 +155,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   centerTitle: true,
                   leading: IconButton(
                       //导航栏最左侧Widget，常见为抽屉菜单按钮或返回按钮。
-                      icon: Icon(Icons.ac_unit),
+                      icon: Image.asset('lib//assets/images/vibez-logo.png',width: 32.5, height:30.0 ,),
                       onPressed: () {
                         print('点击了直播按钮');
                       }),
