@@ -41,7 +41,7 @@ class _VideoDescriptionState extends State<VideoDescription> {
                         width: 25.7,
                         height: 22.5,
                         margin: EdgeInsets.only(bottom: 7.0),
-                        child: Image.asset('lib//assets/images/link.png'),
+                        child: Image.asset('lib/assets/images/link.png'),
                       ),
                       Text(
                         '12k',
@@ -56,7 +56,7 @@ class _VideoDescriptionState extends State<VideoDescription> {
                         height: 22.5,
                         margin: EdgeInsets.only(bottom: 7.0),
                         child:
-                            Image.asset('lib//assets/images/inbox-video.png'),
+                            Image.asset('lib/assets/images/inbox-video.png'),
                       ),
                       Text(
                         '12k',
@@ -70,7 +70,7 @@ class _VideoDescriptionState extends State<VideoDescription> {
                         width: 27.1,
                         height: 22.5,
                         margin: EdgeInsets.only(bottom: 7.0),
-                        child: Image.asset('lib//assets/images/share.png'),
+                        child: Image.asset('lib/assets/images/share.png'),
                       ),
                       Text(
                         '12k',
