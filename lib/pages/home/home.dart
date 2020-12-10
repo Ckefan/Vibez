@@ -1,3 +1,4 @@
+import 'package:Vibez/common/eventBus.dart';
 import 'package:Vibez/components/home/following.dart';
 import 'package:Vibez/pages/discover/discover.dart';
 import 'package:Vibez/pages/inbox/inbox.dart';
@@ -93,7 +94,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               currentIndex = i;
               if (i == 0) {
                 _tabController.animateTo(0);
-              } else {}
+                eventBus.fire(new PlayVideo());
+              } else {
+                print("DDDDDDDDDDDDDDDDDDDDDDD");
+                eventBus.fire(new PauseVideo());
+              }
             }),
           },
           child: Container(
@@ -155,7 +160,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   centerTitle: true,
                   leading: IconButton(
                       //导航栏最左侧Widget，常见为抽屉菜单按钮或返回按钮。
-                      icon: Image.asset('lib/assets/images/vibez-logo.png',width: 32.5, height:30.0 ,),
+                      icon: Image.asset(
+                        'lib/assets/images/vibez-logo.png',
+                        width: 32.5,
+                        height: 30.0,
+                      ),
                       onPressed: () {
                         print('点击了直播按钮');
                       }),
@@ -177,7 +186,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     controller: _tabController,
                     tabs: toptabs,
                     onTap: (index) {
-                      print(index);
+                      print(index.toString() + 'home.dart');
                     },
                   ),
                 )
@@ -245,6 +254,12 @@ class _ProvidePageState extends State<ProvidePage> {
               counter.increment();
             },
           ),
+          IconButton(
+            icon: Icon(Icons.subject),
+            onPressed: () {
+              counter.subtract();
+            },
+          ),
         ],
       ),
     );
@@ -258,6 +273,12 @@ class CounterNotifier with ChangeNotifier {
   int get count => _count;
   increment() {
     _count++;
+    //核心方法，， 通知刷新UI,调用build方法
+    notifyListeners();
+  }
+
+  subtract() {
+    _count--;
     //核心方法，， 通知刷新UI,调用build方法
     notifyListeners();
   }

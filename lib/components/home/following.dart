@@ -100,8 +100,6 @@ class _FollowingState extends State<Following> {
 
   @override
   Widget build(BuildContext context) {
-    print(videos.length);
-    print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%');
     return PageView(
         scrollDirection: Axis.vertical,
         controller: pageController,

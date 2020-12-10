@@ -1,3 +1,4 @@
+import 'package:Vibez/common/eventBus.dart';
 import 'package:flutter/material.dart';
 import 'package:getflutter/getflutter.dart';
 import 'package:video_player/video_player.dart';
@@ -23,25 +24,28 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
               _controller.setLooping(true);
             })
           });
+
+    eventBus.on<PauseVideo>().listen((PauseVideo data) => pause());
+    eventBus.on<PlayVideo>().listen((PlayVideo data) => play());
   }
 
   void pause() {
-    _controller.pause();
+    if (_controller.value.isPlaying) _controller.pause();
   }
 
   void play() {
-    _controller.play();
+    if (!_controller.value.isPlaying) _controller.play();
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    _controller.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   print("player.dart 执行了dispose");
+  //   super.dispose();
+  //   _controller.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
-    print(_controller.value.initialized);
     print("------------------------------------");
     return Container(
         width: double.infinity,
