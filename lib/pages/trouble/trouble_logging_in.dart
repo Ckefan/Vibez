@@ -184,8 +184,7 @@ class _TroubleLoggingInState extends State<TroubleLoggingIn> {
                   'Cancel',
                   style: TextStyle(
                       color: Color.fromRGBO(255, 255, 255, 1),
-                      fontSize: 12.0,
-                      fontFamily: 'Regular'),
+                      fontSize: 12.0),
                 ),
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {

@@ -58,8 +58,7 @@ class _EnterBirthdayState extends State<EnterBirthday> {
                   birthdayDate != '' ? birthdayDate : 'MM/DD/YYYY',
                   style: TextStyle(
                       color: Color.fromRGBO(184, 184, 184, 1),
-                      fontSize: 16.0,
-                      fontFamily: 'Regular'),
+                      fontSize: 16.0),
                 )),
           ),
         ),

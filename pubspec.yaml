@@ -70,7 +70,14 @@ flutter:
     - lib/assets/images/inbox-video.png
     - lib/assets/images/play.png
     - lib/assets/images/vibez-logo.png
-   
+    - lib/assets/images/user-selecte-dDM.png
+    - lib/assets/images/user-img.png
+    - lib/assets/images/usa.jpg
+    - lib/assets/images/feature.png
+    - lib/assets/images/feature-active.png
+    - lib/assets/images/tagged.png
+    - lib/assets/images/tagged-active.png
+    - lib/assets/images/sp.png
     
    
 

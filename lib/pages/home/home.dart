@@ -26,14 +26,12 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       child: Text('Following',
           style: TextStyle(
               fontSize: 16.0,
-              fontFamily: 'Regular',
               color: Color.fromRGBO(255, 255, 255, 1))),
     ),
     Tab(
       child: Text('Your Vibez',
           style: TextStyle(
               fontSize: 16.0,
-              fontFamily: 'Regular',
               color: Color.fromRGBO(255, 255, 255, 1))),
     ),
   ];

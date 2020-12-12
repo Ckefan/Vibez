@@ -73,7 +73,6 @@ class _ConfirmationCodeState extends State<ConfirmationCode> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 12.0,
-                          fontFamily: 'Regular',
                           color: Color.fromRGBO(184, 184, 184, 1),
                         ),
                       ),
@@ -83,7 +82,6 @@ class _ConfirmationCodeState extends State<ConfirmationCode> {
                         'Use my email Instead',
                         style: TextStyle(
                           fontSize: 12.0,
-                          fontFamily: 'Regular',
                           color: Color.fromRGBO(41, 169, 224, 1),
                         ),
                       ),
