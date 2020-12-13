@@ -78,6 +78,10 @@ flutter:
     - lib/assets/images/tagged.png
     - lib/assets/images/tagged-active.png
     - lib/assets/images/sp.png
+    - lib/assets/images/activiry.png
+    - lib/assets/images/ads.png
+    - lib/assets/images/archive.png
+    - lib/assets/images/diamond.png
     
    
 

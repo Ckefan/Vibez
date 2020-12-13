@@ -197,26 +197,6 @@ class _MyTabsState extends State<MyTabs> with SingleTickerProviderStateMixin {
                     ),
                     Image.asset(
                       'lib/assets/images/sp.png',
-                      fit: BoxFit.fill,
-                    ),
-                    Image.asset(
-                      'lib/assets/images/sp.png',
-                      fit: BoxFit.fill,
-                    ),
-                    Image.asset(
-                      'lib/assets/images/sp.png',
-                      fit: BoxFit.fill,
-                    ),
-                    Image.asset(
-                      'lib/assets/images/sp.png',
-                      fit: BoxFit.fill,
-                    ),
-                    Image.asset(
-                      'lib/assets/images/sp.png',
-                      fit: BoxFit.fill,
-                    ),
-                    Image.asset(
-                      'lib/assets/images/sp.png',
                       fit: BoxFit.fitWidth,
                     ),
                     Image.asset(
@@ -228,14 +208,6 @@ class _MyTabsState extends State<MyTabs> with SingleTickerProviderStateMixin {
                       fit: BoxFit.fitWidth,
                     ),
                   ]),
-              Container(
-                height: 20,
-                color: Colors.red,
-                child: Text(
-                  'data',
-                  style: TextStyle(fontSize: 50, color: Colors.white),
-                ),
-              ),
             ],
           ),
         ),
