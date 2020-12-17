@@ -1,20 +1,32 @@
 PODS:
+  - easy_contact_picker (0.0.1):
+    - Flutter
   - Flutter (1.0.0)
+  - permission_handler (3.3.0):
+    - Flutter
   - video_player (0.0.1):
     - Flutter
 
 DEPENDENCIES:
+  - easy_contact_picker (from `.symlinks/plugins/easy_contact_picker/ios`)
   - Flutter (from `Flutter`)
+  - permission_handler (from `.symlinks/plugins/permission_handler/ios`)
   - video_player (from `.symlinks/plugins/video_player/ios`)
 
 EXTERNAL SOURCES:
+  easy_contact_picker:
+    :path: ".symlinks/plugins/easy_contact_picker/ios"
   Flutter:
     :path: Flutter
+  permission_handler:
+    :path: ".symlinks/plugins/permission_handler/ios"
   video_player:
     :path: ".symlinks/plugins/video_player/ios"
 
 SPEC CHECKSUMS:
+  easy_contact_picker: 9ab9dc70e8ddde6e76a19ffc482d7bf899868730
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  permission_handler: 67637977b227d62d46bfbf524f335f8568de5a73
   video_player: 9cc823b1d9da7e8427ee591e8438bfbcde500e6e
 
 PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c

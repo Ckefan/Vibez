@@ -20,6 +20,7 @@ class _GetContactsState extends State<GetContacts>
 
   _openAddressBook() async {
     // 申请权限
+    // ignore: unused_local_variable
     Map<PermissionGroup, PermissionStatus> permissions =
         await PermissionHandler()
             .requestPermissions([PermissionGroup.contacts]);
@@ -48,6 +49,7 @@ class _GetContactsState extends State<GetContacts>
   bool get wantKeepAlive => true;
 
   @override
+  // ignore: must_call_super
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(

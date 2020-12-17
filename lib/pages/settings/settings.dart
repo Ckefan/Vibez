@@ -1,3 +1,5 @@
+import 'package:Vibez/pages/settings/activity.dart';
+import 'package:Vibez/pages/settings/privacy/index.dart';
 import 'package:flutter/material.dart';
 
 import 'follow_invite_friends/index.dart';
@@ -77,6 +79,16 @@ class _SettingsState extends State<Settings> {
       case 0:
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return FollowInviteFriends();
+        }));
+        break;
+      case 1:
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return Activity();
+        }));
+        break;
+      case 4:
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return Privacy();
         }));
         break;
       default:

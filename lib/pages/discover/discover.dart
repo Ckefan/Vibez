@@ -9,7 +9,6 @@ class Discover extends StatefulWidget {
 class _DiscoverState extends State<Discover> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     final list = EasyContactPicker();
     print(list);
