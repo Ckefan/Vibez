@@ -1,5 +1,5 @@
 import 'package:Vibez/pages/settings/activity.dart';
-import 'package:Vibez/pages/settings/privacy/index.dart';
+import 'package:Vibez/pages/settings/privacy/privacy.dart';
 import 'package:flutter/material.dart';
 
 import 'follow_invite_friends/index.dart';
