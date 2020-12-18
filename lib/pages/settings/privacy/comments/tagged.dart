@@ -95,26 +95,6 @@ class _TaggedState extends State<Tagged> {
             ),
           )
         ],
-        [
-          SizedBox(),
-          Text(' No One', style: TextStyle(fontSize: 17.0, color: greyColor)),
-          Container(
-            width: 26,
-            height: 26,
-            margin: EdgeInsets.all(15),
-            decoration: BoxDecoration(
-              color: index == 4
-                  ? Color.fromRGBO(41, 169, 224, 1)
-                  : Colors.transparent,
-              borderRadius: BorderRadius.circular(50.0),
-              border: Border.all(
-                  width: 1,
-                  color: index == 4
-                      ? Color.fromRGBO(41, 169, 224, 1)
-                      : Colors.white),
-            ),
-          )
-        ],
       ]
           .asMap()
           .map(

@@ -166,13 +166,17 @@ class _PrivacyState extends State<Privacy> {
         leading: null,
       ),
       body: Container(
-        color: Colors.black,
-        width: double.infinity,
-        height: double.infinity,
-        child: Column(
-          children: _buildList(),
-        ),
-      ),
+          color: Colors.black,
+          width: double.infinity,
+          height: double.infinity,
+          child: ListView.builder(
+            itemBuilder: (context, index) {
+              return Column(
+                children: _buildList(),
+              );
+            },
+             itemCount: 1,
+          )),
     );
   }
 }
