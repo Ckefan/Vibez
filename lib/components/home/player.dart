@@ -90,7 +90,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                           },
                           child: Center(
                             child: Image.asset(
-                              'lib//assets/images/play.png',
+                              'lib/assets/images/play.png',
                               width: 80,
                               height: 80,
                             ),

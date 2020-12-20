@@ -1,5 +1,13 @@
 import 'dart:ui';
+import 'package:Vibez/pages/settings/privacy/ActivityStatus/ActivityStatus.dart';
+import 'package:Vibez/pages/settings/privacy/AllowComboReact/AllowComboReact.dart';
+import 'package:Vibez/pages/settings/privacy/BlockedUsers/BlockedUsers.dart';
+import 'package:Vibez/pages/settings/privacy/Mentions/Mentions.dart';
+import 'package:Vibez/pages/settings/privacy/MutedUsers/MutedUsers.dart';
+import 'package:Vibez/pages/settings/privacy/RestrictedUsers/RestrictedUsers.dart';
+import 'package:Vibez/pages/settings/privacy/Story/Story.dart';
 import 'package:Vibez/pages/settings/privacy/comments/comments.dart';
+import 'package:Vibez/pages/settings/privacy/comments/tagged.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -52,12 +60,13 @@ class _PrivacyState extends State<Privacy> {
           SizedBox(),
         ],
         [
-          Image.asset('lib/assets/images/inbox.png', width: 22.0, height: 18),
+          Image.asset('lib/assets/images/comment.png', width: 22.0, height: 18),
           Text(' Comments', style: TextStyle(fontSize: 17.0, color: greyColor)),
           Icon(Icons.chevron_right, color: greyColor, size: 30)
         ],
         [
-          Image.asset('lib/assets/images/tagged.png', width: 22.0, height: 18),
+          Image.asset('lib/assets/images/Tagged-Settings.png',
+              width: 22.0, height: 18),
           Text(' Tags', style: TextStyle(fontSize: 17.0, color: greyColor)),
           Icon(Icons.chevron_right, color: greyColor, size: 30)
         ],
@@ -78,7 +87,8 @@ class _PrivacyState extends State<Privacy> {
           Icon(Icons.chevron_right, color: greyColor, size: 30)
         ],
         [
-          Image.asset('lib/assets/images/diamond.png', width: 22.0, height: 18),
+          Image.asset('lib/assets/images/activiry.png',
+              width: 22.0, height: 18),
           Text(' Activity Status',
               style: TextStyle(fontSize: 17.0, color: greyColor)),
           Icon(Icons.chevron_right, color: greyColor, size: 30)
@@ -106,13 +116,15 @@ class _PrivacyState extends State<Privacy> {
           Icon(Icons.chevron_right, color: greyColor, size: 30)
         ],
         [
-          Icon(Icons.error, color: greyColor, size: 22.0),
+          Image.asset('lib/assets/images/Blocked Settings Icon.png',
+              width: 22.0, height: 18),
           Text(' Blocked Users',
               style: TextStyle(fontSize: 17.0, color: greyColor)),
           Icon(Icons.chevron_right, color: greyColor, size: 30)
         ],
         [
-          Icon(Icons.error, color: greyColor, size: 22.0),
+          Image.asset('lib/assets/images/Muted Settings Icon.png',
+              width: 22.0, height: 18),
           Text(' Muted Users',
               style: TextStyle(fontSize: 17.0, color: greyColor)),
           Icon(Icons.chevron_right, color: greyColor, size: 30)
@@ -123,6 +135,7 @@ class _PrivacyState extends State<Privacy> {
             (index, e) => MapEntry(
               index,
               GestureDetector(
+                behavior: HitTestBehavior.opaque,
                 child: Padding(
                   padding: EdgeInsets.only(left: 15, top: 10, bottom: 10),
                   child: Row(
@@ -151,6 +164,47 @@ class _PrivacyState extends State<Privacy> {
           return Comments();
         }));
         break;
+      case 5:
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return Tagged();
+        }));
+        break;
+      case 6:
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return Mentions();
+        }));
+        break;
+      case 7:
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return Story();
+        }));
+        break;
+      case 8:
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return AllowComboReact();
+        }));
+        break;
+      case 9:
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return ActivityStatus();
+        }));
+        break;
+      case 12:
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return RestrictedUsers();
+        }));
+        break;
+      case 13:
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return BlockedUsers();
+        }));
+        break;
+        break;
+      case 14:
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return MutedUsers();
+        }));
+        break;
       default:
     }
   }
@@ -175,7 +229,7 @@ class _PrivacyState extends State<Privacy> {
                 children: _buildList(),
               );
             },
-             itemCount: 1,
+            itemCount: 1,
           )),
     );
   }

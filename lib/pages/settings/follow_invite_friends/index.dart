@@ -19,6 +19,7 @@ class _FollowInviteFriendsState extends State<FollowInviteFriends> {
             (index, e) => MapEntry(
               index,
               GestureDetector(
+                 behavior: HitTestBehavior.opaque,
                 child: Padding(
                   padding: EdgeInsets.only(left: 15, top: 10, bottom: 10),
                   child: Row(

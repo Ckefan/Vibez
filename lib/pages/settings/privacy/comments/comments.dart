@@ -21,12 +21,13 @@ class _CommentsState extends State<Comments> {
           SizedBox(),
         ],
         [
-          Image.asset('lib/assets/images/inbox.png', width: 22.0, height: 18),
+          Image.asset('lib/assets/images/comment.png', width: 22.0, height: 18),
           Text(' Comments', style: TextStyle(fontSize: 17.0, color: greyColor)),
           Icon(Icons.chevron_right, color: greyColor, size: 30)
         ],
         [
-          Image.asset('lib/assets/images/inbox.png', width: 22.0, height: 18),
+          Image.asset('lib/assets/images/Tagged-Settings.png',
+              width: 22.0, height: 18),
           Text(' Tagged', style: TextStyle(fontSize: 17.0, color: greyColor)),
           Icon(Icons.chevron_right, color: greyColor, size: 30)
         ],
@@ -76,6 +77,7 @@ class _CommentsState extends State<Comments> {
             (index, e) => MapEntry(
               index,
               GestureDetector(
+                 behavior: HitTestBehavior.opaque,
                 child: Padding(
                   padding: EdgeInsets.only(left: 15, top: 10, bottom: 10),
                   child: Row(

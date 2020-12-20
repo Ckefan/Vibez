@@ -2,65 +2,38 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class AllowComments extends StatefulWidget {
+class TopicFilter extends StatefulWidget {
   @override
-  _AllowCommentsState createState() => _AllowCommentsState();
+  _TopicFilterState createState() => _TopicFilterState();
 }
 
-class _AllowCommentsState extends State<AllowComments> {
+class _TopicFilterState extends State<TopicFilter> {
   final greyColor = Color.fromRGBO(184, 184, 184, 1);
-  var index = 0;
+  var index = 2;
 
   List<GestureDetector> _buildList() => <List>[
         [
           SizedBox(),
-          Text(' Everyone', style: TextStyle(fontSize: 17.0, color: greyColor)),
-          Container(
-            width: 26,
-            height: 26,
-            margin: EdgeInsets.all(15),
-            decoration: BoxDecoration(
-              color: index == 0
-                  ? Color.fromRGBO(41, 169, 224, 1)
-                  : Colors.transparent,
-              borderRadius: BorderRadius.circular(50.0),
-              border: Border.all(
-                  width: 1,
-                  color: index == 0
-                      ? Color.fromRGBO(41, 169, 224, 1)
-                      : Colors.white),
-            ),
-          )
+          Text(' See fewer ads on certain topics',
+              style: TextStyle(fontSize: 17.0, color: Colors.white)),
+          SizedBox(),
         ],
         [
           SizedBox(),
-          Text(' People You Follow and Your Followers',
-              style: TextStyle(fontSize: 17.0, color: greyColor)),
-          Container(
-            width: 26,
-            height: 26,
-            margin: EdgeInsets.all(15),
-            decoration: BoxDecoration(
-              color: index == 1
-                  ? Color.fromRGBO(41, 169, 224, 1)
-                  : Colors.transparent,
-              borderRadius: BorderRadius.circular(50.0),
-              border: Border.all(
-                  width: 1,
-                  color: index == 1
-                      ? Color.fromRGBO(41, 169, 224, 1)
-                      : Colors.white),
-            ),
-          )
+          Text(
+              ' Choose topics that may be sensitive or that affect your experience.',
+              style: TextStyle(fontSize: 12.0, color: greyColor)),
+          SizedBox(
+            width: 30,
+          ),
         ],
         [
           SizedBox(),
-          Text(' People you Follow',
-              style: TextStyle(fontSize: 17.0, color: greyColor)),
+          Text(' Alcohol', style: TextStyle(fontSize: 17.0, color: greyColor)),
           Container(
             width: 26,
             height: 26,
-            margin: EdgeInsets.all(15),
+            margin: EdgeInsets.only(right: 15),
             decoration: BoxDecoration(
               color: index == 2
                   ? Color.fromRGBO(41, 169, 224, 1)
@@ -76,12 +49,12 @@ class _AllowCommentsState extends State<AllowComments> {
         ],
         [
           SizedBox(),
-          Text(' Your Followers',
+          Text(' Social Issues',
               style: TextStyle(fontSize: 17.0, color: greyColor)),
           Container(
             width: 26,
             height: 26,
-            margin: EdgeInsets.all(15),
+            margin: EdgeInsets.only(right: 15),
             decoration: BoxDecoration(
               color: index == 3
                   ? Color.fromRGBO(41, 169, 224, 1)
@@ -97,11 +70,11 @@ class _AllowCommentsState extends State<AllowComments> {
         ],
         [
           SizedBox(),
-          Text(' No One', style: TextStyle(fontSize: 17.0, color: greyColor)),
+          Text(' Politics', style: TextStyle(fontSize: 17.0, color: greyColor)),
           Container(
             width: 26,
             height: 26,
-            margin: EdgeInsets.all(15),
+            margin: EdgeInsets.only(right: 15),
             decoration: BoxDecoration(
               color: index == 4
                   ? Color.fromRGBO(41, 169, 224, 1)
@@ -115,15 +88,57 @@ class _AllowCommentsState extends State<AllowComments> {
             ),
           )
         ],
+        [
+          SizedBox(),
+          Text(' Parenting',
+              style: TextStyle(fontSize: 17.0, color: greyColor)),
+          Container(
+            width: 26,
+            height: 26,
+            margin: EdgeInsets.only(right: 15),
+            decoration: BoxDecoration(
+              color: index == 5
+                  ? Color.fromRGBO(41, 169, 224, 1)
+                  : Colors.transparent,
+              borderRadius: BorderRadius.circular(50.0),
+              border: Border.all(
+                  width: 1,
+                  color: index == 5
+                      ? Color.fromRGBO(41, 169, 224, 1)
+                      : Colors.white),
+            ),
+          )
+        ],
+        [
+          SizedBox(),
+          Text(' Sexual Ads',
+              style: TextStyle(fontSize: 17.0, color: greyColor)),
+          Container(
+            width: 26,
+            height: 26,
+            margin: EdgeInsets.only(right: 15),
+            decoration: BoxDecoration(
+              color: index == 6
+                  ? Color.fromRGBO(41, 169, 224, 1)
+                  : Colors.transparent,
+              borderRadius: BorderRadius.circular(50.0),
+              border: Border.all(
+                  width: 1,
+                  color: index == 6
+                      ? Color.fromRGBO(41, 169, 224, 1)
+                      : Colors.white),
+            ),
+          )
+        ],
       ]
           .asMap()
           .map(
             (index, e) => MapEntry(
               index,
               GestureDetector(
-                 behavior: HitTestBehavior.opaque,
+                behavior: HitTestBehavior.opaque,
                 child: Padding(
-                  padding: EdgeInsets.only(left: 15, top: 0, bottom: 0),
+                  padding: EdgeInsets.only(left: 15, top: 10, bottom: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -142,9 +157,10 @@ class _AllowCommentsState extends State<AllowComments> {
           .values
           .toList();
 
-  void operation(int i) {
+  void operation(int _index) {
+    print(_index);
     setState(() {
-      index = i;
+      index = _index;
     });
   }
 
@@ -152,7 +168,7 @@ class _AllowCommentsState extends State<AllowComments> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Allow Comments From'),
+        title: Text('Topic Filter'),
         backgroundColor: Colors.black,
         elevation: 0,
         centerTitle: true,

@@ -87,7 +87,16 @@ flutter:
     - lib/assets/images/archive.png
     - lib/assets/images/diamond.png
     
+    #setting
+    - lib/assets/images/comment.png
+    - lib/assets/images/Tagged-Settings.png
+    - lib/assets/images/Blocked Settings Icon.png
+    - lib/assets/images/Muted Settings Icon.png
+    - lib/assets/images/Password Icon.png
+    - lib/assets/images/Emails From vibez Icon.png
+    - lib/assets/images/Saved Login Info Icon.png
    
+  
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -103,10 +112,12 @@ flutter:
   fonts:
     - family: Extra
       fonts:
-        - asset: lib/assets/fonts/Poppins-ExtraLight.ttf
         - asset: lib/assets/fonts/Poppins-ExtraLightItalic.ttf
         - asset: lib/assets/fonts/Poppins-ExtraBold.ttf
         - asset: lib/assets/fonts/Poppins-ExtraBoldItalic.ttf
+    - family: ExtraLight
+      fonts:
+        - asset: lib/assets/fonts/Poppins-ExtraLight.ttf
     - family: Regular
       fonts:
         - asset:  lib/assets/fonts/Poppins-Regular.ttf

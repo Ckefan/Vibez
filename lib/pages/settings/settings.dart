@@ -1,5 +1,9 @@
+import 'package:Vibez/pages/balance/Balance.dart';
+import 'package:Vibez/pages/settings/account/Account.dart';
 import 'package:Vibez/pages/settings/activity.dart';
+import 'package:Vibez/pages/settings/ads/Ads.dart';
 import 'package:Vibez/pages/settings/privacy/privacy.dart';
+import 'package:Vibez/pages/settings/security/Security.dart';
 import 'package:flutter/material.dart';
 
 import 'follow_invite_friends/index.dart';
@@ -34,6 +38,7 @@ class _SettingsState extends State<Settings> {
             (index, e) => MapEntry(
               index,
               GestureDetector(
+                behavior: HitTestBehavior.opaque,
                 child: Padding(
                   padding: EdgeInsets.only(left: 15, top: 10, bottom: 10),
                   child: Row(
@@ -62,7 +67,7 @@ class _SettingsState extends State<Settings> {
                       Icon(
                         e[2],
                         color: greyColor,
-                        size: 22,
+                        size: 30,
                       ),
                     ],
                   ),
@@ -89,6 +94,26 @@ class _SettingsState extends State<Settings> {
       case 4:
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return Privacy();
+        }));
+        break;
+      case 5:
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return Security();
+        }));
+        break;
+      case 6:
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return Ads();
+        }));
+        break;
+      case 7:
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return Account();
+        }));
+        break;
+      case 8:
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return Balance();
         }));
         break;
       default:
