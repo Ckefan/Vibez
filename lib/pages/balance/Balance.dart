@@ -1,3 +1,4 @@
+import 'package:Vibez/pages/balance/BuyDiamonds.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -12,61 +13,111 @@ class _BalanceState extends State<Balance> {
 
   List<GestureDetector> _buildList() => <List>[
         [
-          SizedBox(),
-          Text.rich(TextSpan(children: [
-            TextSpan(
-                text: 'DIAMOND',
+          Padding(
+            padding: EdgeInsets.only(top: 50, bottom: 50),
+            child: Text.rich(
+              TextSpan(children: [
+                TextSpan(
+                    text: 'DIAMOND',
+                    style: TextStyle(
+                        fontSize: 19,
+                        color: greyColor,
+                        fontFamily: 'ExtraLight')),
+                TextSpan(
+                    text: ' Balance',
+                    style: TextStyle(
+                        fontSize: 19,
+                        color: Color.fromRGBO(41, 169, 224, 1),
+                        fontFamily: 'ExtraLight'))
+              ]),
+            ),
+          ),
+        ],
+        [
+          Image.asset(
+            'lib/assets/images/diamonds.png',
+            width: 111,
+            height: 111,
+          )
+        ],
+        [
+          Text('102', style: TextStyle(fontSize: 30.0, color: greyColor)),
+        ],
+        [
+          Text('DIAMONDS', style: TextStyle(fontSize: 30.0, color: greyColor)),
+        ],
+        [
+          Text('Low on Diamonds?',
+              style: TextStyle(fontSize: 13.0, color: greyColor)),
+        ],
+        [
+          Container(
+            width: 141.0,
+            height: 50.0,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment(0.0, -1.0),
+                end: Alignment(0.0, 1.0),
+                colors: [
+                  Color.fromRGBO(41, 169, 224, 1),
+                  Color.fromRGBO(82, 168, 204, 1),
+                ],
+              ),
+              borderRadius: BorderRadius.circular(30.0),
+            ),
+            child: RaisedButton(
+              child: Text(
+                "Buy More",
                 style: TextStyle(
-                    fontSize: 19, color: greyColor, fontFamily: 'ExtraLight')),
-            TextSpan(
-                text: 'Balance',
+                    color: Color.fromRGBO(255, 255, 255, 1),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w300),
+              ),
+              color: Colors.transparent,
+              elevation: 0, // 正常时阴影隐藏
+              highlightElevation: 0, // 点击
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return BuyDiamonds();
+                }));
+              },
+            ),
+          )
+        ],
+        [
+          Container(
+            width: 141.0,
+            height: 50.0,
+            margin: EdgeInsets.only(top: 50),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment(0.0, -1.0),
+                end: Alignment(0.0, 1.0),
+                colors: [
+                  Color.fromRGBO(52, 225, 75, 1),
+                  Color.fromRGBO(42, 155, 29, 1),
+                ],
+              ),
+              borderRadius: BorderRadius.circular(30.0),
+            ),
+            child: RaisedButton(
+              child: Text(
+                "Cash Out",
                 style: TextStyle(
-                    fontSize: 19,
-                    color: Color.fromRGBO(41, 169, 224, 1),
-                    fontFamily: 'ExtraLight'))
-          ])),
-          SizedBox(),
-        ],
-        [
-          SizedBox(),
-          Text(' Language', style: TextStyle(fontSize: 17.0, color: greyColor)),
-          SizedBox(),
-        ],
-        [
-          SizedBox(),
-          Text(' Contact Syncing',
-              style: TextStyle(fontSize: 17.0, color: greyColor)),
-          SizedBox(),
-        ],
-        [
-          SizedBox(),
-          Text(' Cellular Data Use',
-              style: TextStyle(fontSize: 17.0, color: greyColor)),
-          SizedBox(),
-        ],
-        [
-          SizedBox(),
-          Text(' Cellular Data Use',
-              style: TextStyle(fontSize: 17.0, color: greyColor)),
-          SizedBox(),
-        ],
-        [
-          SizedBox(),
-          Text(' Cellular Data Use',
-              style: TextStyle(fontSize: 17.0, color: greyColor)),
-          SizedBox(),
-        ],
-        [
-          SizedBox(),
-          Text(' Cellular Data Use',
-              style: TextStyle(fontSize: 17.0, color: greyColor)),
-          SizedBox(),
-        ],
-        [
-          SizedBox(),
-          Text(' Cellular Data Use',
-              style: TextStyle(fontSize: 17.0, color: greyColor)),
-          SizedBox(),
+                    color: Color.fromRGBO(255, 255, 255, 1),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w300),
+              ),
+              color: Colors.transparent,
+              elevation: 0, // 正常时阴影隐藏
+              highlightElevation: 0, // 点击
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  // return ConfirmationCode();
+                }));
+              },
+            ),
+          )
         ],
       ]
           .asMap()
@@ -77,16 +128,7 @@ class _BalanceState extends State<Balance> {
                 behavior: HitTestBehavior.opaque,
                 child: Padding(
                   padding: EdgeInsets.only(left: 15, top: 10, bottom: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      e[0],
-                      Expanded(
-                        child: e[1],
-                      ),
-                      e[2]
-                    ],
-                  ),
+                  child: e[0],
                 ),
                 onTap: () => operation(index),
               ),
@@ -126,7 +168,9 @@ class _BalanceState extends State<Balance> {
         color: Colors.black,
         width: double.infinity,
         height: double.infinity,
-        child: Column(children: _buildList()),
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: _buildList()),
       ),
     );
   }
