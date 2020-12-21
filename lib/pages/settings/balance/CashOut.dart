@@ -1,94 +1,83 @@
-import 'package:Vibez/pages/balance/BuyDiamonds.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class Balance extends StatefulWidget {
+class CashOut extends StatefulWidget {
   @override
-  _BalanceState createState() => _BalanceState();
+  _CashOutState createState() => _CashOutState();
 }
 
-class _BalanceState extends State<Balance> {
+class _CashOutState extends State<CashOut> {
   final greyColor = Color.fromRGBO(184, 184, 184, 1);
   var _lights = true;
 
   List<GestureDetector> _buildList() => <List>[
         [
           Padding(
-            padding: EdgeInsets.only(top: 50, bottom: 50),
+            padding: EdgeInsets.only(top: 30),
             child: Text.rich(
               TextSpan(children: [
                 TextSpan(
-                    text: 'DIAMOND',
+                    text: 'CASH',
                     style: TextStyle(
                         fontSize: 19,
                         color: greyColor,
                         fontFamily: 'ExtraLight')),
                 TextSpan(
-                    text: ' Balance',
+                    text: ' OUT',
                     style: TextStyle(
                         fontSize: 19,
-                        color: Color.fromRGBO(41, 169, 224, 1),
+                        color: Color.fromRGBO(0, 255, 111, 1),
                         fontFamily: 'ExtraLight'))
               ]),
             ),
           ),
         ],
         [
-          Image.asset(
-            'lib/assets/images/diamonds.png',
-            width: 111,
-            height: 111,
-          )
+          Text.rich(
+            TextSpan(children: [
+              TextSpan(
+                  text: '400',
+                  style: TextStyle(
+                      fontSize: 19,
+                      color: greyColor,
+                      fontFamily: 'ExtraLight')),
+              TextSpan(
+                  text: ' DIAMONDS',
+                  style: TextStyle(
+                      fontSize: 19,
+                      color: Color.fromRGBO(41, 169, 224, 1),
+                      fontFamily: 'ExtraLight')),
+              TextSpan(
+                  text: ' AVAILABLE',
+                  style: TextStyle(
+                      fontSize: 19, color: greyColor, fontFamily: 'ExtraLight'))
+            ]),
+          ),
         ],
         [
-          Text('102', style: TextStyle(fontSize: 30.0, color: greyColor)),
+          Text('400',
+              style: TextStyle(
+                  fontSize: 50.0,
+                  color: Color.fromRGBO(41, 169, 224, 1),
+                  fontFamily: 'Medium')),
         ],
         [
-          Text('DIAMONDS', style: TextStyle(fontSize: 30.0, color: greyColor)),
+          Text('CHANGE AMOUNT',
+              style: TextStyle(
+                  fontSize: 13.0, color: greyColor, fontFamily: 'ExtraLight')),
         ],
         [
-          Text('Low on Diamonds?',
-              style: TextStyle(fontSize: 13.0, color: greyColor)),
-        ],
-        [
-          Container(
-            width: 141.0,
-            height: 50.0,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment(0.0, -1.0),
-                end: Alignment(0.0, 1.0),
-                colors: [
-                  Color.fromRGBO(41, 169, 224, 1),
-                  Color.fromRGBO(82, 168, 204, 1),
-                ],
-              ),
-              borderRadius: BorderRadius.circular(30.0),
-            ),
-            child: RaisedButton(
-              child: Text(
-                "Buy More",
-                style: TextStyle(
-                    color: Color.fromRGBO(255, 255, 255, 1),
-                    fontSize: 14,
-                    fontWeight: FontWeight.w300),
-              ),
-              color: Colors.transparent,
-              elevation: 0, // 正常时阴影隐藏
-              highlightElevation: 0, // 点击
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return BuyDiamonds();
-                }));
-              },
-            ),
-          )
+          Text('\$2.00',
+              style: TextStyle(
+                  fontSize: 100.0,
+                  color: Color.fromRGBO(50, 214, 68, 1),
+                  fontFamily: 'Medium')),
         ],
         [
           Container(
-            width: 141.0,
+            width: 300.0,
             height: 50.0,
-            margin: EdgeInsets.only(top: 50),
+            margin: EdgeInsets.only(top: 10),
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment(0.0, -1.0),
@@ -105,7 +94,7 @@ class _BalanceState extends State<Balance> {
                 "Cash Out",
                 style: TextStyle(
                     color: Color.fromRGBO(255, 255, 255, 1),
-                    fontSize: 14,
+                    fontSize: 25,
                     fontWeight: FontWeight.w300),
               ),
               color: Colors.transparent,
@@ -149,7 +138,7 @@ class _BalanceState extends State<Balance> {
         break;
       case 3:
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          // return BalanceForBusiness();
+          // return CashOutForBusiness();
         }));
         break;
       default:
@@ -159,7 +148,7 @@ class _BalanceState extends State<Balance> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text("Balance"),
+          title: Text("CashOut"),
           backgroundColor: Colors.black,
           elevation: 0,
           centerTitle: true,

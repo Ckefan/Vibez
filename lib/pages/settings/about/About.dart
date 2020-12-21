@@ -1,37 +1,64 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class BuyDiamonds extends StatefulWidget {
+class About extends StatefulWidget {
   @override
-  _BuyDiamondsState createState() => _BuyDiamondsState();
+  _AboutState createState() => _AboutState();
 }
 
-class _BuyDiamondsState extends State<BuyDiamonds> {
+class _AboutState extends State<About> {
   final greyColor = Color.fromRGBO(184, 184, 184, 1);
   var _lights = true;
 
   List<GestureDetector> _buildList() => <List>[
         [
           SizedBox(),
-          Text(' Saved', style: TextStyle(fontSize: 17.0, color: greyColor)),
-          Icon(Icons.chevron_right, color: greyColor, size: 30)
-        ],
-        [
-          SizedBox(),
-          Text(' Language', style: TextStyle(fontSize: 17.0, color: greyColor)),
-          Icon(Icons.chevron_right, color: greyColor, size: 30)
-        ],
-        [
-          SizedBox(),
-          Text(' Contact Syncing',
+          Text(' Terms Of Service',
               style: TextStyle(fontSize: 17.0, color: greyColor)),
           Icon(Icons.chevron_right, color: greyColor, size: 30)
         ],
         [
           SizedBox(),
-          Text(' Cellular Data Use',
+          Text(' Intellectual Property Policy',
               style: TextStyle(fontSize: 17.0, color: greyColor)),
           Icon(Icons.chevron_right, color: greyColor, size: 30)
+        ],
+        [
+          SizedBox(),
+          Text(' Privacy Policy',
+              style: TextStyle(fontSize: 17.0, color: greyColor)),
+          Icon(Icons.chevron_right, color: greyColor, size: 30)
+        ],
+        [
+          SizedBox(),
+          Text(' Privacy Policy for Young Users',
+              style: TextStyle(fontSize: 17.0, color: greyColor)),
+          Icon(Icons.chevron_right, color: greyColor, size: 30)
+        ],
+        [
+          SizedBox(),
+          Text(' Cookies Policy',
+              style: TextStyle(fontSize: 17.0, color: greyColor)),
+          Icon(Icons.chevron_right, color: greyColor, size: 30)
+        ],
+        [
+          SizedBox(),
+          Divider(
+            color: Color.fromRGBO(246, 246, 246, 1),
+            height: 0,
+            thickness: 1,
+            indent: 0,
+            endIndent: 0,
+          ),
+          SizedBox(),
+        ],
+        [
+          SizedBox(),
+          Center(
+            child: Text(' Vibez 1.0 released 10/22/2020',
+                style: TextStyle(fontSize: 12.0, color: greyColor)),
+          ),
+          SizedBox(),
         ],
       ]
           .asMap()
@@ -72,7 +99,7 @@ class _BuyDiamondsState extends State<BuyDiamonds> {
         break;
       case 3:
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          // return BuyDiamondsForBusiness();
+          // return AboutForBusiness();
         }));
         break;
       default:
@@ -82,7 +109,7 @@ class _BuyDiamondsState extends State<BuyDiamonds> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text("Buy Diamonds"),
+          title: Text("About"),
           backgroundColor: Colors.black,
           elevation: 0,
           centerTitle: true,

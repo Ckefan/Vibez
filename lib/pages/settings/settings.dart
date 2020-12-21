@@ -1,7 +1,9 @@
-import 'package:Vibez/pages/balance/Balance.dart';
+import 'package:Vibez/pages/settings/about/About.dart';
 import 'package:Vibez/pages/settings/account/Account.dart';
 import 'package:Vibez/pages/settings/activity.dart';
 import 'package:Vibez/pages/settings/ads/Ads.dart';
+import 'package:Vibez/pages/settings/balance/Balance.dart';
+import 'package:Vibez/pages/settings/help/Help.dart';
 import 'package:Vibez/pages/settings/privacy/privacy.dart';
 import 'package:Vibez/pages/settings/security/Security.dart';
 import 'package:flutter/material.dart';
@@ -17,21 +19,142 @@ class _SettingsState extends State<Settings> {
   final greyColor = Color.fromRGBO(184, 184, 184, 1);
 
   List<GestureDetector> _buildList() => <List>[
-        [Icons.people, ' Follow and Invite Friends', Icons.chevron_right],
-        ['lib/assets/images/activiry.png', ' Activity', Icons.chevron_right],
-        ['lib/assets/images/archive.png', ' Archive', Icons.chevron_right],
-        [Icons.notifications_active, ' Notifications', Icons.chevron_right],
-        [Icons.lock, ' Privacy', Icons.chevron_right],
-        [Icons.security, ' Security', Icons.chevron_right],
-        ['lib/assets/images/ads.png', ' Ads', Icons.chevron_right],
-        [Icons.account_circle, ' Account', Icons.chevron_right],
         [
-          'lib/assets/images/diamond.png',
-          ' Diamond Balance',
-          Icons.chevron_right
+          Icon(Icons.people, color: greyColor, size: 22.0),
+          Expanded(
+            child: Text(
+              ' Follow and Invite Friends',
+              style: TextStyle(fontSize: 17.0, color: greyColor),
+            ),
+          ),
+          Icon(Icons.chevron_right, color: greyColor, size: 30)
         ],
-        [Icons.help, ' Help', Icons.chevron_right],
-        [Icons.error, ' About', Icons.chevron_right],
+        [
+          Image.asset('lib/assets/images/activiry.png',
+              width: 22.0, height: 18),
+          Expanded(
+            child: Text(
+              ' Activity',
+              style: TextStyle(fontSize: 17.0, color: greyColor),
+            ),
+          ),
+          Icon(Icons.chevron_right, color: greyColor, size: 30)
+        ],
+        [
+          Image.asset('lib/assets/images/archive.png', width: 22.0, height: 18),
+          Expanded(
+            child: Text(
+              ' Archive',
+              style: TextStyle(fontSize: 17.0, color: greyColor),
+            ),
+          ),
+          Icon(Icons.chevron_right, color: greyColor, size: 30)
+        ],
+        [
+          Icon(Icons.notifications_active, color: greyColor, size: 22.0),
+          Expanded(
+            child: Text(
+              ' Notifications',
+              style: TextStyle(fontSize: 17.0, color: greyColor),
+            ),
+          ),
+          Icon(Icons.chevron_right, color: greyColor, size: 30)
+        ],
+        [
+          Icon(Icons.lock, color: greyColor, size: 22.0),
+          Expanded(
+            child: Text(
+              ' Privacy',
+              style: TextStyle(fontSize: 17.0, color: greyColor),
+            ),
+          ),
+          Icon(Icons.chevron_right, color: greyColor, size: 30)
+        ],
+        [
+          Icon(Icons.security, color: greyColor, size: 22.0),
+          Expanded(
+            child: Text(
+              ' Security',
+              style: TextStyle(
+                fontSize: 17.0,
+                color: greyColor,
+              ),
+            ),
+          ),
+          Icon(Icons.chevron_right, color: greyColor, size: 30)
+        ],
+        [
+          Image.asset('lib/assets/images/ads.png', width: 22.0, height: 18),
+          Expanded(
+            child: Text(
+              ' Ads',
+              style: TextStyle(fontSize: 17.0, color: greyColor),
+            ),
+          ),
+          Icon(Icons.chevron_right, color: greyColor, size: 30)
+        ],
+        [
+          Icon(Icons.account_circle, color: greyColor, size: 22.0),
+          Expanded(
+            child: Text(
+              ' Account',
+              style: TextStyle(fontSize: 17.0, color: greyColor),
+            ),
+          ),
+          Icon(Icons.chevron_right, color: greyColor, size: 30)
+        ],
+        [
+          Image.asset('lib/assets/images/diamond.png', width: 22.0, height: 18),
+          Expanded(
+            child: Text(
+              ' Diamond Balance',
+              style: TextStyle(fontSize: 17.0, color: greyColor),
+            ),
+          ),
+          Icon(Icons.chevron_right, color: greyColor, size: 30)
+        ],
+        [
+          Icon(Icons.help, color: greyColor, size: 22.0),
+          Expanded(
+            child: Text(' Help',
+                style: TextStyle(fontSize: 17.0, color: greyColor)),
+          ),
+          Icon(Icons.chevron_right, color: greyColor, size: 30)
+        ],
+        [
+          Icon(Icons.error, color: greyColor, size: 22.0),
+          Expanded(
+            child: Text(
+              ' About',
+              style: TextStyle(fontSize: 17.0, color: greyColor),
+            ),
+          ),
+          Icon(Icons.chevron_right, color: greyColor, size: 30)
+        ],
+        [
+          SizedBox(),
+          Expanded(
+            child: Divider(
+              color: Color.fromRGBO(246, 246, 246, 1),
+              height: 0,
+              thickness: 1,
+              indent: 0,
+              endIndent: 0,
+            ),
+          ),
+          SizedBox(),
+        ],
+        [
+          SizedBox(),
+          Center(
+            child: Text(' Log Out',
+                style: TextStyle(
+                    fontSize: 20.0,
+                    color: Color.fromRGBO(255, 35, 57, 1),
+                    fontFamily: 'Medium')),
+          ),
+          SizedBox(),
+        ],
       ]
           .asMap()
           .map(
@@ -43,33 +166,7 @@ class _SettingsState extends State<Settings> {
                   padding: EdgeInsets.only(left: 15, top: 10, bottom: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      e[0] is String
-                          ? Image.asset(
-                              e[0],
-                              width: 22.0,
-                              height: 18,
-                            )
-                          : Icon(
-                              e[0],
-                              color: greyColor,
-                              size: 22.0,
-                            ),
-                      Expanded(
-                        child: Text(
-                          e[1],
-                          style: TextStyle(
-                            fontSize: 17.0,
-                            color: greyColor,
-                          ),
-                        ),
-                      ),
-                      Icon(
-                        e[2],
-                        color: greyColor,
-                        size: 30,
-                      ),
-                    ],
+                    children: [e[0], e[1], e[2]],
                   ),
                 ),
                 onTap: () => operation(index),
@@ -114,6 +211,16 @@ class _SettingsState extends State<Settings> {
       case 8:
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return Balance();
+        }));
+        break;
+      case 9:
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return Help();
+        }));
+        break;
+      case 10:
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return About();
         }));
         break;
       default:
