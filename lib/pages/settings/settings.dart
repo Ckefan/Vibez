@@ -1,3 +1,6 @@
+import 'dart:ui';
+
+import 'package:Vibez/pages/entry/entry.dart';
 import 'package:Vibez/pages/settings/about/About.dart';
 import 'package:Vibez/pages/settings/account/Account.dart';
 import 'package:Vibez/pages/settings/activity.dart';
@@ -6,6 +9,7 @@ import 'package:Vibez/pages/settings/balance/Balance.dart';
 import 'package:Vibez/pages/settings/help/Help.dart';
 import 'package:Vibez/pages/settings/privacy/privacy.dart';
 import 'package:Vibez/pages/settings/security/Security.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'follow_invite_friends/index.dart';
@@ -222,6 +226,36 @@ class _SettingsState extends State<Settings> {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return About();
         }));
+        break;
+      case 12:
+        showCupertinoModalPopup(
+            context: context,
+            filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+            builder: (BuildContext context) {
+              return CupertinoActionSheet(
+                title: Text(''),
+                message: Text('Are you sure you want to log out?'),
+                actions: <Widget>[
+                  CupertinoActionSheetAction(
+                    child: Text('Log Out'),
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return Entry();
+                      }));
+                    },
+                    isDestructiveAction: true,
+                  ),
+                  CupertinoActionSheetAction(
+                    child: Text('Cancel'),
+                    onPressed: () {
+                      Navigator.pop(context, 'Cancel');
+                    },
+                    isDefaultAction: true,
+                  ),
+                ],
+              );
+            });
         break;
       default:
     }

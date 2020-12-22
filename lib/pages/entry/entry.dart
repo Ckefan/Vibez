@@ -3,9 +3,7 @@ import 'package:Vibez/components/login/login.dart';
 import 'package:Vibez/components/login/signup.dart';
 import 'package:flutter/material.dart';
 
-// ignore: must_be_immutable
 class Entry extends StatefulWidget {
-  //typeStatus is “from trouble_logging_in” page to Entry ，show login
   final typeStatus;
   Entry({Key key, this.typeStatus}) : super(key: key);
   @override

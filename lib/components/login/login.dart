@@ -1,5 +1,5 @@
-import 'package:Vibez/pages/confirmationCode/confirmationCode.dart';
-import 'package:Vibez/pages/trouble/trouble_logging_in.dart';
+import 'package:Vibez/components/login/confirmationCode.dart';
+import 'package:Vibez/components/login/trouble_logging_in.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
