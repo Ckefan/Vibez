@@ -96,9 +96,20 @@ flutter:
     - lib/assets/images/Emails From vibez Icon.png
     - lib/assets/images/Saved Login Info Icon.png
     - lib/assets/images/diamonds.png
-   
-  
 
+    #discover
+    - lib/assets/images/Funny Category.png
+    - lib/assets/images/Cute Category.png
+    - lib/assets/images/Funny Category.png
+    - lib/assets/images/Music Category.png
+
+    #upload 
+    # - lib/assets/images/Video Upload Icon.png
+    # - lib/assets/images/Story Upload Icon.png
+    # - lib/assets/images/Photo Upload Icon.png
+    # - lib/assets/images/Go Live Icon.png
+
+    
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
