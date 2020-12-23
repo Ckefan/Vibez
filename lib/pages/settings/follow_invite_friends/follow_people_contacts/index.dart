@@ -189,5 +189,3 @@ class _FollowPeopleContactsState extends State<FollowPeopleContacts>
     );
   }
 }
-
-class NetworkImage {}

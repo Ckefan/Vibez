@@ -56,7 +56,7 @@ class _DiscoverState extends State<Discover> {
         'lib/assets/images/sp.png',
       ]
           .map((e) => Padding(
-              padding: EdgeInsets.only(right: 10, bottom: 10),
+              padding: EdgeInsets.only(right: 10),
               child: Image.asset(e, width: 103, height: 172)))
           .toList();
   List<Padding> _recommendedUsersList() => [
@@ -77,6 +77,12 @@ class _DiscoverState extends State<Discover> {
           'name': 'Tommy',
           'num': '52M',
           'isFollow': true
+        },
+        {
+          'img': 'lib/assets/images/user-img.png',
+          'name': 'Tommy',
+          'num': '22M',
+          'isFollow': false
         },
         {
           'img': 'lib/assets/images/user-img.png',
@@ -153,11 +159,12 @@ class _DiscoverState extends State<Discover> {
                         borderRadius: BorderRadius.circular(30.0),
                       ),
                       child: RaisedButton(
+                          padding: EdgeInsets.all(0),
                           child: Text(
                             e['isFollow'] ? 'Following' : 'Follow',
                             style: TextStyle(
                               color: Color.fromRGBO(255, 255, 255, 1),
-                              fontSize: 12.0,
+                              fontSize: 10.0,
                             ),
                           ),
                           color: Colors.transparent,
@@ -223,7 +230,7 @@ class _DiscoverState extends State<Discover> {
       width: double.infinity,
       color: Colors.black,
       child: Padding(
-        padding: EdgeInsets.only(top: 30.0, bottom: 60.0),
+        padding: EdgeInsets.only(top: 20.0, bottom: 60.0),
         child: NestedScrollView(
           headerSliverBuilder: (context, bool) {
             return [
@@ -247,7 +254,8 @@ class _DiscoverState extends State<Discover> {
                           end: Alignment(0.0, 1.0),
                           colors: [
                             Color.fromRGBO(0, 0, 0, 1),
-                            Color.fromRGBO(110, 114, 116, .6),
+                            Color.fromRGBO(110, 114, 116, .4),
+                            Color.fromRGBO(0, 0, 0, 1),
                           ],
                         ),
                       ),
@@ -313,11 +321,11 @@ class _DiscoverState extends State<Discover> {
             ];
           },
           body: ListView(
-            physics: ClampingScrollPhysics(),
+            physics: BouncingScrollPhysics(),
             padding: EdgeInsets.all(0),
             children: [
               Padding(
-                padding: EdgeInsets.only(top: 10, bottom: 10, left: 15),
+                padding: EdgeInsets.only(top: 10, bottom: 10, left: 10),
                 child: Column(
                   children: [
                     Row(
@@ -345,6 +353,7 @@ class _DiscoverState extends State<Discover> {
                       ],
                     ),
                     SingleChildScrollView(
+                      physics: BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         children: _genreList(),
@@ -361,7 +370,7 @@ class _DiscoverState extends State<Discover> {
                 endIndent: 0,
               ),
               Padding(
-                padding: EdgeInsets.only(top: 10, bottom: 10, left: 15),
+                padding: EdgeInsets.only(top: 10, left: 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -373,6 +382,7 @@ class _DiscoverState extends State<Discover> {
                           fontFamily: 'Bold'),
                     ),
                     SingleChildScrollView(
+                      physics: BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         children: _videoList(),
@@ -389,7 +399,7 @@ class _DiscoverState extends State<Discover> {
                 endIndent: 0,
               ),
               Padding(
-                padding: EdgeInsets.only(top: 10.0, bottom: 10.0, left: 15),
+                padding: EdgeInsets.only(top: 10.0, bottom: 10.0, left: 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -401,6 +411,8 @@ class _DiscoverState extends State<Discover> {
                           fontFamily: 'Bold'),
                     ),
                     SingleChildScrollView(
+                      padding: EdgeInsets.only(top: 10),
+                      physics: BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         children: _recommendedUsersList(),
@@ -417,7 +429,7 @@ class _DiscoverState extends State<Discover> {
                 endIndent: 0,
               ),
               Padding(
-                padding: EdgeInsets.only(top: 10.0, bottom: 10.0, left: 15),
+                padding: EdgeInsets.only(left: 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -446,6 +458,7 @@ class _DiscoverState extends State<Discover> {
                       ],
                     ),
                     SingleChildScrollView(
+                      physics: BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         children: _topTags(),
@@ -462,7 +475,7 @@ class _DiscoverState extends State<Discover> {
                 endIndent: 0,
               ),
               Padding(
-                padding: EdgeInsets.only(top: 10.0, bottom: 10.0, left: 15),
+                padding: EdgeInsets.only(top: 10.0, bottom: 10.0, left: 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -474,12 +487,14 @@ class _DiscoverState extends State<Discover> {
                           fontFamily: 'Bold'),
                     ),
                     GridView.builder(
+                        padding: EdgeInsets.only(top: 10),
                         shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 3, //横轴三个子widget
                             crossAxisSpacing: 0, //横轴方向的间距。
                             mainAxisSpacing: 0, //竖轴方向的间距。
-                            childAspectRatio: .7 //宽高
+                            childAspectRatio: .72 //宽高
                             ),
                         itemCount: _suggestedList().length,
                         itemBuilder: (context, index) {
