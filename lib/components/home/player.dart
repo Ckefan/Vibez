@@ -18,11 +18,12 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
     super.initState();
     _controller = VideoPlayerController.network(widget.url)
       ..initialize().then((_) => {
-            print("进入了controller"),
-            setState(() {
-              _controller.play();
-              _controller.setLooping(true);
-            })
+            print(
+                "进入了initializeinitializeinitializeinitializeinitializeinitializeinitializeinitializeinitializeinitializeinitializeinitializeinitializeinitializeinitializeinitializeinitializeinitializeinitializeinitializeinitializeinitializeinitializeinitializeinitialize"),
+            // setState(() {
+            //   _controller.play();
+            //   _controller.setLooping(true);
+            // })
           });
 
     eventBus.on<PauseVideo>().listen((PauseVideo data) => pause());
@@ -37,12 +38,12 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
     if (!_controller.value.isPlaying) _controller.play();
   }
 
-  // @override
-  // void dispose() {
-  //   print("player.dart 执行了dispose");
-  //   super.dispose();
-  //   _controller.dispose();
-  // }
+  @override
+  void dispose() {
+    print("player.dart 执行了dispose");
+    super.dispose();
+    _controller.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

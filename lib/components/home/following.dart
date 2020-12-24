@@ -26,13 +26,26 @@ class _FollowingState extends State<Following> {
   @override
   void initState() {
     super.initState();
+    //监听视频翻页
     pageController = PageController(initialPage: 0, keepPage: true)
-      ..addListener(() {
-        if (pageController.position.pixels <
-            pageController.position.maxScrollExtent) {
-          //load more data
-        }
+      ..addListener(() { 
+        // if (pageController.position.pixels <
+        //     pageController.position.maxScrollExtent) {
+        //   //load more data
+        // }
+
+        print(
+            '111111111111111111111111111111111111111111111111111111111111111111111111111111111111');
+        print(pageController.page.floor());
+
+        print(pageController.position.pixels);
+        print(pageController.position.maxScrollExtent);
+        print(
+            '111111111111111111111111111111111111111111111111111111111111111111111111111111111111');
+
+        //
       });
+
     getFollow().then((value) => print('videos ${videos.length} was finished!'));
     if (SchedulerBinding.instance.schedulerPhase ==
         SchedulerPhase.persistentCallbacks) {
@@ -49,7 +62,7 @@ class _FollowingState extends State<Following> {
       print(api.url);
       print('api.url');
 
-      vibez.billboardData.forEach((item) {
+      vibez.billboardData.take(5).forEach((item) {
         getVideos(item).then(
           (value) => {
             // print('videos length: ${videos.length}'),
@@ -73,19 +86,11 @@ class _FollowingState extends State<Following> {
           .then((url) => {
                 url = url.replaceAll('&amp', '&'),
                 url = url.replaceAll('http', 'https'),
-                print("视频资源：" + url),
+                // print("视频资源：" + url),
                 print('videos length: ${videos.length}'),
                 if (url != 'error')
                   {
-                    if (length == 48)
-                      {
-                        setState(() {
-                          firstItem = new VideoItem(
-                            data: videoData,
-                            videourl: url,
-                          );
-                        })
-                      },
+                    if (length == 4) {setState(() {})},
                     videos.add(VideoItem(data: videoData, videourl: url))
                   }
               })
@@ -102,6 +107,11 @@ class _FollowingState extends State<Following> {
   Widget build(BuildContext context) {
     return PageView(
         scrollDirection: Axis.vertical,
+        onPageChanged: (e) {
+          print(e);
+          print(
+              'onPageChangedonPageChangedonPageChangedonPageChangedonPageChangedonPageChangedonPageChangedonPageChangedonPageChangedonPageChangedonPageChangedonPageChangedonPageChangedonPageChangedonPageChangedonPageChangedonPageChangedonPageChangedonPageChangedonPageChanged');
+        },
         controller: pageController,
         children: videos.length == 0
             ? <Widget>[
