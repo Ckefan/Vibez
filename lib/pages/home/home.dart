@@ -25,14 +25,12 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     Tab(
       child: Text('Following',
           style: TextStyle(
-              fontSize: 16.0,
-              color: Color.fromRGBO(255, 255, 255, 1))),
+              fontSize: 16.0, color: Color.fromRGBO(255, 255, 255, 1))),
     ),
     Tab(
       child: Text('Your Vibez',
           style: TextStyle(
-              fontSize: 16.0,
-              color: Color.fromRGBO(255, 255, 255, 1))),
+              fontSize: 16.0, color: Color.fromRGBO(255, 255, 255, 1))),
     ),
   ];
 
@@ -92,10 +90,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               currentIndex = i;
               if (i == 0) {
                 _tabController.animateTo(0);
-                eventBus.fire(new PlayVideo());
+                eventBus.fire(new PlayVideo(null));
               } else {
                 print("DDDDDDDDDDDDDDDDDDDDDDD");
-                eventBus.fire(new PauseVideo());
+                eventBus.fire(new PauseVideo(null));
               }
             }),
           },

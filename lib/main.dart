@@ -1,8 +1,17 @@
+import 'package:Vibez/provide/VideoListProvide.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'pages/entry/entry.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => VideoListProvide()),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
