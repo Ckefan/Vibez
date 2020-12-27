@@ -1,89 +1,70 @@
-import 'package:Vibez/common/eventBus.dart';
+import 'package:Vibez/provide/VideoListProvide.dart';
 import 'package:flutter/material.dart';
 import 'package:getflutter/getflutter.dart';
+import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 
-class VideoPlayerWidget extends StatefulWidget {
-  final url;
-  VideoPlayerWidget({Key key, this.url}) : super(key: key);
+class VideoCard extends StatefulWidget {
+  final video;
+  VideoCard({Key key, this.video}) : super(key: key);
   @override
-  _VideoPlayerWidgetState createState() => _VideoPlayerWidgetState();
+  _VideoCardState createState() => _VideoCardState();
 }
 
-class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
-  VideoPlayerController _controller;
-
+class _VideoCardState extends State<VideoCard> {
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.network(widget.url)
-      ..initialize().then((_) => {
-            setState(() {
-              _controller.play();
-              _controller.setLooping(true);
-            })
-          });
-
-    eventBus.on<PauseVideo>().listen((PauseVideo data) => pause());
-    eventBus.on<PlayVideo>().listen((PlayVideo data) => play());
-  }
-
-  void pause() {
-    if (_controller.value.isPlaying) _controller.pause();
-  }
-
-  void play() {
-    if (!_controller.value.isPlaying) _controller.play();
   }
 
   @override
   void dispose() {
-    print("player.dart 执行了dispose");
     super.dispose();
-    _controller.dispose();
+    // widget.video.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    print("------------------------------------");
+    print(
+        "====================================================-======================================================================");
     return Container(
         width: double.infinity,
         height: double.infinity,
         alignment: Alignment.center,
         color: Colors.black,
-        child: _controller.value.initialized
+        child: widget.video.value.initialized
             ? Stack(
                 children: [
                   GestureDetector(
                     onTap: () {
-                      if (_controller.value.isPlaying) {
+                      if (widget.video.value.isPlaying) {
                         setState(() {
-                          _controller.pause();
+                          widget.video.pause();
                         });
                       } else {
                         setState(() {
-                          _controller.play();
+                          widget.video.play();
                         });
                       }
                     },
                     child: AspectRatio(
-                      aspectRatio: _controller.value
+                      aspectRatio: widget.video.value
                           .aspectRatio, //MediaQuery.of(context).size.width/MediaQuery.of(context).size.height,//0.656, //_controller.value.aspectRatio,
                       child: VideoPlayer(
-                        _controller,
+                        widget.video,
                       ),
                     ),
                   ),
-                  !_controller.value.isPlaying
+                  !widget.video.value.isPlaying
                       ? GestureDetector(
                           onTap: () {
-                            if (_controller.value.isPlaying) {
+                            if (widget.video.value.isPlaying) {
                               setState(() {
-                                _controller.pause();
+                                widget.video.pause();
                               });
                             } else {
                               setState(() {
-                                _controller.play();
+                                widget.video.play();
                               });
                             }
                           },

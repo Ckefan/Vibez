@@ -27,24 +27,10 @@ class _FollowingState extends State<Following> {
   void initState() {
     super.initState();
     //监听视频翻页
-    pageController = PageController(initialPage: 0, keepPage: true)
-      ..addListener(() { 
-        // if (pageController.position.pixels <
-        //     pageController.position.maxScrollExtent) {
-        //   //load more data
-        // }
-
-        print(
-            '111111111111111111111111111111111111111111111111111111111111111111111111111111111111');
-        print(pageController.page.floor());
-
-        print(pageController.position.pixels);
-        print(pageController.position.maxScrollExtent);
-        print(
-            '111111111111111111111111111111111111111111111111111111111111111111111111111111111111');
-
-        //
-      });
+    // pageController = PageController(initialPage: 0, keepPage: true)
+    //   ..addListener(() { 
+       
+    //   });
 
     getFollow().then((value) => print('videos ${videos.length} was finished!'));
     if (SchedulerBinding.instance.schedulerPhase ==
@@ -62,7 +48,7 @@ class _FollowingState extends State<Following> {
       print(api.url);
       print('api.url');
 
-      vibez.billboardData.take(5).forEach((item) {
+      vibez.billboardData.forEach((item) {
         getVideos(item).then(
           (value) => {
             // print('videos length: ${videos.length}'),
