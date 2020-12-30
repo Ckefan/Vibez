@@ -1,3 +1,4 @@
+import 'package:Vibez/provide/ProfileChangeProvide.dart';
 import 'package:Vibez/provide/VideoListProvide.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -7,7 +8,10 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => VideoListProvide()),
+        ChangeNotifierProvider.value(value: VideoListProvide()),
+        ChangeNotifierProvider.value(value: ThemeModel()),
+        ChangeNotifierProvider.value(value: UserModel()),
+        ChangeNotifierProvider.value(value: LocaleModel()),
       ],
       child: MyApp(),
     ),
