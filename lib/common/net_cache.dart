@@ -16,7 +16,7 @@ class CacheObject {
   @override
   int get hashCode => response.realUri.hashCode;
 }
-/*---------------------------------------------------------------------*/
+
 class NetCache extends Interceptor {
   // 为确保迭代器顺序和对象插入时间一致顺序一致，我们使用LinkedHashMap
   var cache = LinkedHashMap<String, CacheObject>();
@@ -54,10 +54,6 @@ class NetCache extends Interceptor {
     }
   }
 
-  @override
-  onError(DioError err) async {
-    // 错误状态不缓存
-  }
 
   @override
   onResponse(Response response) async {
@@ -67,7 +63,7 @@ class NetCache extends Interceptor {
     }
   }
 
-   _saveCache(Response object) {
+  _saveCache(Response object) {
     RequestOptions options = object.request;
     if (options.extra["noCache"] != true &&
         options.method.toLowerCase() == "get") {

@@ -1,4 +1,4 @@
-import 'package:Vibez/common/Global.dart';
+import 'package:Vibez/common/global.dart';
 import 'package:flutter/material.dart';
 
 class ProfileChangeNotifier extends ChangeNotifier {
