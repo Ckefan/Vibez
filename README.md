@@ -6,11 +6,48 @@ A new Flutter project.
 
 This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### 1、Update the rely on
+
+```
+flutter packages get
+```
+<br>
+
+### 2、Run the project
+
+```
+flutter run 
+```
+<br>
+
+### 3、Generate models
+```
+flutter packages pub run json_model
+```
+<br>
+
+------
+## internationalization
+
+### 1、Generate arb file
+
+#### Gennerate messages_all.dart ...
+
+```
+flutter pub run intl_translation:extract_to_arb --output-dir=i10n lib/main.dart
+```
+<br>
+
+### 2、Generate /lib/l10n/*dart file
+
+```
+flutter pub run intl_translation:generate_from_arb --output-dir=lib/l10n --no-use-deferred-loading lib/main.dart lib/l10n/intl_*.arb
+```
+
+### 3、 Extract the code to an ARB file
+
+```
+flutter pub pub run intl_translation:extract_to_arb --output-dir=i10n-arb  lib/l10n/localization_intl.dart
+```

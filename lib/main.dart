@@ -1,5 +1,5 @@
-import 'package:Vibez/provide/ProfileChangeProvide.dart';
-import 'package:Vibez/provide/VideoListProvide.dart';
+import 'package:Vibez/states/VideoListProvide.dart';
+import 'package:Vibez/states/profile_change_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'pages/entry/entry.dart';

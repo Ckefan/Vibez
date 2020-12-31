@@ -1,4 +1,4 @@
-import 'package:Vibez/provide/VideoListProvide.dart';
+import 'package:Vibez/states/VideoListProvide.dart';
 import 'package:flutter/material.dart';
 import 'package:getflutter/getflutter.dart';
 import 'package:provider/provider.dart';

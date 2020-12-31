@@ -1,5 +1,4 @@
-import 'package:Vibez/common/global.dart';
-import 'package:flutter/material.dart';
+import '../index.dart';
 
 class ProfileChangeNotifier extends ChangeNotifier {
   Profile get _profile => Global.profile;
@@ -10,7 +9,7 @@ class ProfileChangeNotifier extends ChangeNotifier {
     super.notifyListeners(); //通知依赖的Widget更新
   }
 }
-//用户状态在登录状态发生变化时更新、通知其依赖项
+
 class UserModel extends ProfileChangeNotifier {
   User get user => _profile.user;
 
@@ -27,7 +26,6 @@ class UserModel extends ProfileChangeNotifier {
   }
 }
 
-//主题状态在用户更换APP主题时更新、通知其依赖项，
 class ThemeModel extends ProfileChangeNotifier {
   // 获取当前主题，如果为设置主题，则默认使用蓝色主题
   ColorSwatch get theme => Global.themes
@@ -42,7 +40,6 @@ class ThemeModel extends ProfileChangeNotifier {
   }
 }
 
-//APP语言状态
 class LocaleModel extends ProfileChangeNotifier {
   // 获取当前用户的APP语言配置Locale类，如果为null，则语言跟随系统语言
   Locale getLocale() {
