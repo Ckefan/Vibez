@@ -36,7 +36,7 @@ flutter packages pub run json_model
 #### Gennerate messages_all.dart ...
 
 ```
-flutter pub run intl_translation:extract_to_arb --output-dir=i10n lib/main.dart
+flutter pub run intl_translation:extract_to_arb --output-dir=l10n lib/main.dart
 ```
 <br>
 
@@ -59,5 +59,5 @@ flutter pub run intl_translation:extract_to_arb --output-dir=l10n-arb lib/l10n/l
 
 ### 5、 Inject the variable into the corresponding multilingual DART file,Mainly modify the after files
 ```
-flutter pub  run intl_translation:generate_from_arb --output-dir=lib/l10n --no-use-deferred-loading lib/l10n/localization_intl.dart i10n-arb/intl_messages.arb i10n-arb/intl_zh_CN.arb
+flutter pub  run intl_translation:generate_from_arb --output-dir=lib/l10n --no-use-deferred-loading lib/l10n/localization_intl.dart l10n-arb/intl_messages.arb l10n-arb/intl_zh_CN.arb
 ```
