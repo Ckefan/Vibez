@@ -40,14 +40,24 @@ flutter pub run intl_translation:extract_to_arb --output-dir=i10n lib/main.dart
 ```
 <br>
 
-### 2、Generate /lib/l10n/*dart file
+
+### 2、Write the variable in the "lib/l10n/localization_intl.dart" file
+
+<br>
+
+### 3、Generate ARB file
 
 ```
-flutter pub run intl_translation:generate_from_arb --output-dir=lib/l10n --no-use-deferred-loading lib/main.dart lib/l10n/intl_*.arb
+flutter pub run intl_translation:extract_to_arb --output-dir=l10n-arb lib/l10n/localization_intl.dart
 ```
 
-### 3、 Extract the code to an ARB file
+<br>
 
+### 4、 Copy the variables from the "l10n-arb/intl_messages.arb" file to another multilingual file, such as the "intl_zh_CN.arb" file
+
+<br>
+
+### 5、 Inject the variable into the corresponding multilingual DART file,Mainly modify the after files
 ```
-flutter pub pub run intl_translation:extract_to_arb --output-dir=i10n-arb  lib/l10n/localization_intl.dart
+flutter pub  run intl_translation:generate_from_arb --output-dir=lib/l10n --no-use-deferred-loading lib/l10n/localization_intl.dart i10n-arb/intl_messages.arb i10n-arb/intl_zh_CN.arb
 ```

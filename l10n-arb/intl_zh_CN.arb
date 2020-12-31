@@ -6,6 +6,12 @@
     "type": "text",
     "placeholders": {}
   },
+   "age": "年龄",
+  "@age": {
+    "description": "age for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
   "home": "Github客户端",
   "@home": {
     "type": "text",

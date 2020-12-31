@@ -21,6 +21,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
+    "age" : MessageLookupByLibrary.simpleMessage("年龄"),
     "title" : MessageLookupByLibrary.simpleMessage("Github客户端")
   };
 }

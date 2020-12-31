@@ -25,6 +25,20 @@ class DemoLocalizations {
       desc: 'Title for the Demo application',
     );
   }
+  String get age {
+    return Intl.message(
+      'Age APP',
+      name: 'age',
+      desc: 'age for the Demo application',
+    );
+  }
+   String get size {
+    return Intl.message(
+      'size APP',
+      name: 'size',
+      desc: 'size for the Demo application',
+    );
+  }
 }
 
 //Locale代理类
