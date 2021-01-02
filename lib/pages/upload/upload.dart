@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:Vibez/pages/upload/photo/photo.dart';
 import 'package:flutter/material.dart';
 
 class Upload extends StatefulWidget {
@@ -8,6 +9,8 @@ class Upload extends StatefulWidget {
 }
 
 class _UploadState extends State<Upload> {
+  final textStyle = TextStyle(fontSize: 20, color: Colors.white);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,21 +30,66 @@ class _UploadState extends State<Upload> {
               ),
               GridView(
                 shrinkWrap: true,
+                padding: EdgeInsets.only(top: 100),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3, //横轴三个子widget
+                    crossAxisCount: 2, //横轴三个子widget
                     crossAxisSpacing: 0, //横轴方向的间距。
-                    mainAxisSpacing: 0, //竖轴方向的间距。
-                    childAspectRatio: .7 //宽高
+                    mainAxisSpacing: 100, //竖轴方向的间距。
+                    childAspectRatio: 2 //宽高
                     ),
                 children: [
-                  // Image.asset('lib/assets/images/Video Upload Icon.png',
-                  //     width: 60.0, height: 40.0),
-                  // Image.asset('lib/assets/images/Photo Upload Icon.png',
-                  //     width: 60.0, height: 54.0),
-                  // Image.asset('lib/assets/images/Story Upload Icon.png',
-                  //     width: 60.0, height: 60.0),
-                  // Image.asset('lib/assets/images/Go Live Icon.png',
-                  //     width: 60.0, height: 54.5)
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Image.asset('lib/assets/images/Video Upload Icon.png',
+                          width: 60.0, height: 40.0),
+                      Text(
+                        'Video',
+                        style: textStyle,
+                      )
+                    ],
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return Photo();
+                      }));
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Image.asset('lib/assets/images/Photo Upload Icon.png',
+                            width: 60.0, height: 54.0),
+                        Text(
+                          'Photo',
+                          style: textStyle,
+                        )
+                      ],
+                    ),
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Image.asset('lib/assets/images/Story Upload Icon.png',
+                          width: 60.0, height: 60.0),
+                      Text(
+                        'Story',
+                        style: textStyle,
+                      )
+                    ],
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Image.asset('lib/assets/images/Go Live Icon.png',
+                          width: 60.0, height: 54.5),
+                      Text(
+                        'Go Live',
+                        style: textStyle,
+                      )
+                    ],
+                  ),
                 ],
               )
             ],

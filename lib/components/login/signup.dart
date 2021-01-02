@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../index.dart';
+
 class Signup extends StatefulWidget {
   final setstatus;
   Signup({Key key, this.setstatus}) : super(key: key);
@@ -9,6 +11,17 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
+  var _phoneEmail = '', _name = '', _username = '', _password = '';
+
+  void register() async {
+    await Git(context).register(queryParameters: {
+      'phoneEmail': _phoneEmail,
+      'name': _name,
+      'username': _username,
+      'password': _password
+    }).then((value) => print(value));
+  }
+
   @override
   Widget build(BuildContext context) {
     final fontColor =
@@ -46,6 +59,7 @@ class _SignupState extends State<Signup> {
                       hintText: 'PHONE NUMBER OR EMAIL',
                       border: InputBorder.none,
                       hintStyle: fontColor),
+                  onChanged: (val) => _phoneEmail = val,
                 ),
               ),
             ),
@@ -66,6 +80,7 @@ class _SignupState extends State<Signup> {
                       hintText: 'NAME',
                       border: InputBorder.none,
                       hintStyle: fontColor),
+                  onChanged: (val) => _name = val,
                 ),
               ),
             ),
@@ -86,6 +101,7 @@ class _SignupState extends State<Signup> {
                       hintText: 'USERNAME',
                       border: InputBorder.none,
                       hintStyle: fontColor),
+                  onChanged: (val) => _username = val,
                 ),
               ),
             ),
@@ -106,6 +122,7 @@ class _SignupState extends State<Signup> {
                     hintText: 'PASSWORD',
                     hintStyle: fontColor,
                     border: InputBorder.none),
+                onChanged: (val) => _password = val,
               ),
             ),
           ),
@@ -135,7 +152,14 @@ class _SignupState extends State<Signup> {
               color: Colors.transparent,
               elevation: 0, // 正常时阴影隐藏
               highlightElevation: 0, // 点击
-              onPressed: () => widget.setstatus(3),
+              onPressed: () {
+                print(_phoneEmail);
+                print(_name);
+                print(_username);
+                print(_password);
+                // register();
+                widget.setstatus(3);
+              },
             ),
           ),
           Text(
@@ -153,7 +177,9 @@ class _SignupState extends State<Signup> {
                 style: TextStyle(
                     color: Color.fromRGBO(255, 255, 255, 1), fontSize: 12.0),
               ),
-              onPressed: () => widget.setstatus(0),
+              onPressed: () {
+                widget.setstatus(0);
+              },
             ),
           ),
         ],

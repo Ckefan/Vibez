@@ -44,6 +44,8 @@ dependencies:
   intl: ^0.16.0
   shared_preferences: ^0.5.12+4 #数据持久化
   fluttertoast: ^7.1.6  #Toast消息
+  image_picker: ^0.6.7+17
+  camera: ^0.5.7+3
 
 dev_dependencies:
   flutter_test:
@@ -114,10 +116,10 @@ flutter:
     - lib/assets/images/Music Category.png
 
     #upload 
-    # - lib/assets/images/Video Upload Icon.png
-    # - lib/assets/images/Story Upload Icon.png
-    # - lib/assets/images/Photo Upload Icon.png
-    # - lib/assets/images/Go Live Icon.png
+    - lib/assets/images/Video Upload Icon.png
+    - lib/assets/images/Story Upload Icon.png
+    - lib/assets/images/Photo Upload Icon.png
+    - lib/assets/images/Go Live Icon.png
 
     
   # An image asset can refer to one or more resolution-specific "variants", see

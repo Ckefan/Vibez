@@ -16,10 +16,9 @@ class Git {
   BuildContext context;
   Options _options;
   static Dio dio = new Dio(BaseOptions(
-    baseUrl: 'https://api.github.com/',
+    baseUrl: 'http://3.138.155.112/',
     headers: {
-      HttpHeaders.acceptHeader: "application/vnd.github.squirrel-girl-preview,"
-          "application/vnd.github.symmetra-preview+json",
+      HttpHeaders.acceptHeader: "application/json",
     },
   ));
 
@@ -33,9 +32,9 @@ class Git {
     if (!Global.isRelease) {
       (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
           (client) {
-        client.findProxy = (uri) {
-          return "PROXY 10.95.249.53:8888";
-        };
+        // client.findProxy = (uri) {
+        //   return "PROXY 3.138.155.112";
+        // };
         //代理工具会提供一个抓包的自签名证书，会通不过证书校验，所以我们禁用证书校验
         client.badCertificateCallback =
             (X509Certificate cert, String host, int port) => true;
@@ -61,6 +60,24 @@ class Git {
     //更新profile中的token信息
     Global.profile.token = basic;
     return User.fromJson(r.data);
+  }
+
+  // 注册接口，注册成功后返回用户信息
+  Future register({Map<String, dynamic> queryParameters}) async {
+    var r = await dio.post(
+      "http://postman-echo.com/post",
+      options: _options.merge(extra: {
+        "noCache": true, //本接口禁用缓存
+      }),
+      queryParameters: queryParameters,
+    );
+    //登录成功后更新公共头（authorization），此后的所有请求都会带上用户身份信息
+    // dio.options.headers[HttpHeaders.authorizationHeader] = basic;
+    // //清空所有缓存
+    // Global.netCache.cache.clear();
+    // //更新profile中的token信息
+    // Global.profile.token = basic;
+    return r;
   }
 
   //获取用户项目列表
