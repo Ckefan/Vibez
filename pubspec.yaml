@@ -46,6 +46,7 @@ dependencies:
   fluttertoast: ^7.1.6  #Toast消息
   image_picker: ^0.6.7+17
   camera: ^0.5.7+3
+  path_provider: ^1.6.24 #查找常用路径
   photofilters: ^2.0.1 #滤镜
 
 dev_dependencies:

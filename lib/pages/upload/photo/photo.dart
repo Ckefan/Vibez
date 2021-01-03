@@ -6,6 +6,7 @@ import 'package:camera/camera.dart';
 import 'package:path/path.dart';
 import 'package:image/image.dart' as imageLib;
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:photofilters/photofilters.dart';
 
 class Photo extends StatefulWidget {
@@ -15,6 +16,8 @@ class Photo extends StatefulWidget {
 
 class _PhotoState extends State<Photo> {
   CameraController controller;
+  Future<void> _initializeControllerFuture;
+
   String fileName;
   File imageFile;
   List<Filter> filters = presetFiltersList;
@@ -24,7 +27,7 @@ class _PhotoState extends State<Photo> {
   Future initCamera() async {
     cameras = await availableCameras(); //获取相机列表
     controller = CameraController(cameras[0], ResolutionPreset.medium);
-    controller.initialize().then((_) {
+    _initializeControllerFuture = controller.initialize().then((_) {
       if (!mounted) {
         return;
       }
@@ -65,6 +68,32 @@ class _PhotoState extends State<Photo> {
     }
   }
 
+  //拍照
+  Future getCameraPhoto() async {
+    try {
+      // Ensure that the camera is initialized.
+      await _initializeControllerFuture;
+
+      // Construct the path where the image should be saved using the path
+      final path = join(
+        // Store the picture in the temp directory.
+        // Find the temp directory using the `path_provider` plugin.
+        (await getTemporaryDirectory()).path,
+        '${DateTime.now()}.png',
+      );
+      // Attempt to take a picture and log where it's been saved.
+      await controller.takePicture(path);
+      print(path);
+      print('拍照完成');
+      setState(() {
+        imageFile = File(path);
+      });
+    } catch (e) {
+      // If an error occurs, log the error to the console.
+      print(e);
+    }
+  }
+
   @override
   void initState() {
     print(presetFiltersList);
@@ -81,6 +110,8 @@ class _PhotoState extends State<Photo> {
   @override
   Widget build(BuildContext context) {
     final _isInitialized = controller?.value?.isInitialized;
+    final size = MediaQuery.of(context).size;
+    final deviceRatio = size.width / size.height;
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -89,18 +120,24 @@ class _PhotoState extends State<Photo> {
         child: Stack(
           children: [
             Container(
-              width: double.infinity,
-              height: double.infinity,
-              child: _isInitialized != null
-                  ? AspectRatio(
-                      aspectRatio: MediaQuery.of(context).size.width /
-                          MediaQuery.of(context).size.height,
-                      child: CameraPreview(controller))
-                  : imageFile != null
-                      ? Image.file(
-                          imageFile,
-                          width: 300,
-                          height: 500,
+              width: size.width,
+              height: size.height,
+              child: imageFile != null
+                  ? Image.file(
+                      imageFile,
+                      width: size.width,
+                      height: size.height,
+                      fit: BoxFit.cover,
+                    )
+                  : _isInitialized != null
+                      ? Transform.scale(
+                          scale: controller.value.aspectRatio / deviceRatio,
+                          child: Center(
+                            child: AspectRatio(
+                              aspectRatio: controller.value.aspectRatio,
+                              child: CameraPreview(controller),
+                            ),
+                          ),
                         )
                       : SizedBox(),
             ),
@@ -177,47 +214,50 @@ class _PhotoState extends State<Photo> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(width: 27.0, height: 32.0),
-                  Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Container(
-                        width: 95.0,
-                        height: 95.0,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            width: 4.0,
-                            color: Color.fromRGBO(41, 169, 224, 1),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        width: 80.0,
-                        height: 80.0,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          shape: BoxShape.circle,
-                        ),
-                      ),
-                      Container(
-                        width: 50.0,
-                        height: 55.0,
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                                color: Color.fromRGBO(0, 0, 0, 0.2),
-                                offset: Offset(0, 4.0),
-                                blurRadius: 10.0)
-                          ],
-                          image: DecorationImage(
-                            image: AssetImage(
-                              'lib/assets/images/Photo Upload Icon.png',
+                  GestureDetector(
+                    onTap: () => getCameraPhoto(),
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Container(
+                          width: 95.0,
+                          height: 95.0,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              width: 4.0,
+                              color: Color.fromRGBO(41, 169, 224, 1),
                             ),
-                            fit: BoxFit.contain,
                           ),
                         ),
-                      ),
-                    ],
+                        Container(
+                          width: 80.0,
+                          height: 80.0,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                        Container(
+                          width: 50.0,
+                          height: 55.0,
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Color.fromRGBO(0, 0, 0, 0.2),
+                                  offset: Offset(0, 4.0),
+                                  blurRadius: 10.0)
+                            ],
+                            image: DecorationImage(
+                              image: AssetImage(
+                                'lib/assets/images/Photo Upload Icon.png',
+                              ),
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   GestureDetector(
                     onTap: () => getGalleryImage(context),
