@@ -41,11 +41,12 @@ dependencies:
   permission_handler: '^3.2.0' # 权限申请
   charts_flutter: "^0.8.1" 
   cached_network_image: ^2.0.0
-  intl: ^0.16.0
+  intl: ^0.16.1
   shared_preferences: ^0.5.12+4 #数据持久化
   fluttertoast: ^7.1.6  #Toast消息
   image_picker: ^0.6.7+17
   camera: ^0.5.7+3
+  photofilters: ^2.0.1 #滤镜
 
 dev_dependencies:
   flutter_test:
@@ -121,6 +122,14 @@ flutter:
     - lib/assets/images/Photo Upload Icon.png
     - lib/assets/images/Go Live Icon.png
 
+    #photo
+    - lib/assets/images/Switch Camera Icon.png
+    - lib/assets/images/Upload Post Icon.png
+    - lib/assets/images/Timer Icon.png
+    - lib/assets/images/Filters Icon.png
+    - lib/assets/images/Flash On icon.png
+    - lib/assets/images/Flash Off Icon.png
+   
     
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
