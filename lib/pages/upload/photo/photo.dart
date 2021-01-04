@@ -3,10 +3,10 @@ import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
-import 'package:path/path.dart';
-import 'package:image/image.dart' as imageLib;
+// import 'package:path/path.dart';
+// import 'package:image/image.dart' as imageLib;
 import 'package:image_picker/image_picker.dart';
-import 'package:path_provider/path_provider.dart';
+// import 'package:path_provider/path_provider.dart';
 import 'package:photofilters/photofilters.dart';
 
 class Photo extends StatefulWidget {
@@ -24,16 +24,16 @@ class _PhotoState extends State<Photo> {
 
   var cameras;
 
-  Future initCamera() async {
-    cameras = await availableCameras(); //获取相机列表
-    controller = CameraController(cameras[0], ResolutionPreset.medium);
-    _initializeControllerFuture = controller.initialize().then((_) {
-      if (!mounted) {
-        return;
-      }
-      setState(() {});
-    });
-  }
+  // Future initCamera() async {
+  //   cameras = await availableCameras(); //获取相机列表
+  //   controller = CameraController(cameras[0], ResolutionPreset.medium);
+  //   _initializeControllerFuture = controller.initialize().then((_) {
+  //     if (!mounted) {
+  //       return;
+  //     }
+  //     setState(() {});
+  //   });
+  // }
 
   //打开本地相册，选取图片
   Future getGalleryImage(context) async {
@@ -41,64 +41,27 @@ class _PhotoState extends State<Photo> {
         await ImagePicker().getImage(source: ImageSource.gallery);
     print(pickedFile);
 
-    imageFile = File(pickedFile.path);
     print(imageFile);
-
-    fileName = basename(imageFile.path);
-    var image = imageLib.decodeImage(imageFile.readAsBytesSync());
-    image = imageLib.copyResize(image, width: 600);
-    Map imagefile = await Navigator.push(
-      context,
-      new MaterialPageRoute(
-        builder: (context) => new PhotoFilterSelector(
-          title: Text(""),
-          image: image,
-          filters: presetFiltersList,
-          filename: fileName,
-          loader: Center(child: CircularProgressIndicator()),
-          fit: BoxFit.contain,
-        ),
-      ),
-    );
-    if (imagefile != null && imagefile.containsKey('image_filtered')) {
-      setState(() {
-        imageFile = imagefile['image_filtered'];
-      });
-      print(imageFile.path);
-    }
+    setState(() {
+      imageFile = File(pickedFile.path);
+    });
   }
 
   //拍照
-  Future getCameraPhoto() async {
-    try {
-      // Ensure that the camera is initialized.
-      await _initializeControllerFuture;
+  Future startCameraPhoto() async {
+    final pickedFile = await ImagePicker().getImage(source: ImageSource.camera);
 
-      // Construct the path where the image should be saved using the path
-      final path = join(
-        // Store the picture in the temp directory.
-        // Find the temp directory using the `path_provider` plugin.
-        (await getTemporaryDirectory()).path,
-        '${DateTime.now()}.png',
-      );
-      // Attempt to take a picture and log where it's been saved.
-      await controller.takePicture(path);
-      print(path);
-      print('拍照完成');
-      setState(() {
-        imageFile = File(path);
-      });
-    } catch (e) {
-      // If an error occurs, log the error to the console.
-      print(e);
-    }
+    print(pickedFile.path);
+    setState(() {
+      imageFile = File(pickedFile.path);
+    });
   }
 
   @override
   void initState() {
     print(presetFiltersList);
     super.initState();
-    initCamera();
+    startCameraPhoto();
   }
 
   @override
@@ -214,51 +177,52 @@ class _PhotoState extends State<Photo> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(width: 27.0, height: 32.0),
-                  GestureDetector(
-                    onTap: () => getCameraPhoto(),
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Container(
-                          width: 95.0,
-                          height: 95.0,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              width: 4.0,
-                              color: Color.fromRGBO(41, 169, 224, 1),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          width: 80.0,
-                          height: 80.0,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            shape: BoxShape.circle,
-                          ),
-                        ),
-                        Container(
-                          width: 50.0,
-                          height: 55.0,
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Color.fromRGBO(0, 0, 0, 0.2),
-                                  offset: Offset(0, 4.0),
-                                  blurRadius: 10.0)
-                            ],
-                            image: DecorationImage(
-                              image: AssetImage(
-                                'lib/assets/images/Photo Upload Icon.png',
-                              ),
-                              fit: BoxFit.contain,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  SizedBox(width: 27.0, height: 32.0),
+                  // GestureDetector(
+                  //   onTap: () => getCameraPhoto(),
+                  //   child: Stack(
+                  //     alignment: Alignment.center,
+                  //     children: [
+                  //       Container(
+                  //         width: 95.0,
+                  //         height: 95.0,
+                  //         decoration: BoxDecoration(
+                  //           shape: BoxShape.circle,
+                  //           border: Border.all(
+                  //             width: 4.0,
+                  //             color: Color.fromRGBO(41, 169, 224, 1),
+                  //           ),
+                  //         ),
+                  //       ),
+                  //       Container(
+                  //         width: 80.0,
+                  //         height: 80.0,
+                  //         decoration: BoxDecoration(
+                  //           color: Colors.white,
+                  //           shape: BoxShape.circle,
+                  //         ),
+                  //       ),
+                  //       Container(
+                  //         width: 50.0,
+                  //         height: 55.0,
+                  //         decoration: BoxDecoration(
+                  //           boxShadow: [
+                  //             BoxShadow(
+                  //                 color: Color.fromRGBO(0, 0, 0, 0.2),
+                  //                 offset: Offset(0, 4.0),
+                  //                 blurRadius: 10.0)
+                  //           ],
+                  //           image: DecorationImage(
+                  //             image: AssetImage(
+                  //               'lib/assets/images/Photo Upload Icon.png',
+                  //             ),
+                  //             fit: BoxFit.contain,
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
                   GestureDetector(
                     onTap: () => getGalleryImage(context),
                     child: Image.asset('lib/assets/images/Upload Post Icon.png',
