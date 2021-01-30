@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:Vibez/pages/upload/photo/photo.dart';
+import 'package:Vibez/pages/upload/video/video.dart';
 import 'package:flutter/material.dart';
 
 class Upload extends StatefulWidget {
@@ -38,16 +39,24 @@ class _UploadState extends State<Upload> {
                     childAspectRatio: 2 //宽高
                     ),
                 children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Image.asset('lib/assets/images/Video Upload Icon.png',
-                          width: 60.0, height: 40.0),
-                      Text(
-                        'Video',
-                        style: textStyle,
-                      )
-                    ],
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return VideoUpload();
+                      }));
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Image.asset('lib/assets/images/Video Upload Icon.png',
+                            width: 60.0, height: 40.0),
+                        Text(
+                          'Video',
+                          style: textStyle,
+                        )
+                      ],
+                    ),
                   ),
                   GestureDetector(
                     onTap: () {

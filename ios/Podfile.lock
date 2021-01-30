@@ -1,4 +1,9 @@
 PODS:
+  - AlivcConan (1.0.3):
+    - AlivcConan/AlivcConan (= 1.0.3)
+  - AlivcConan/AlivcConan (1.0.3)
+  - AliyunOSSiOS (2.10.8)
+  - AliyunVideoSDKStd (3.18.1)
   - camera (0.0.1):
     - Flutter
   - easy_contact_picker (0.0.1):
@@ -16,6 +21,7 @@ PODS:
     - Flutter
   - permission_handler (3.3.0):
     - Flutter
+  - QuCore-ThirdParty (3.15.0)
   - shared_preferences (0.0.1):
     - Flutter
   - sqflite (0.0.1):
@@ -24,8 +30,13 @@ PODS:
   - Toast (4.0.0)
   - video_player (0.0.1):
     - Flutter
+  - VODUpload (1.6.1):
+    - AliyunOSSiOS
 
 DEPENDENCIES:
+  - AlivcConan (= 1.0.3)
+  - AliyunOSSiOS
+  - AliyunVideoSDKStd (= 3.18.1)
   - camera (from `.symlinks/plugins/camera/ios`)
   - easy_contact_picker (from `.symlinks/plugins/easy_contact_picker/ios`)
   - Flutter (from `Flutter`)
@@ -33,14 +44,21 @@ DEPENDENCIES:
   - image_picker (from `.symlinks/plugins/image_picker/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
   - permission_handler (from `.symlinks/plugins/permission_handler/ios`)
+  - QuCore-ThirdParty (= 3.15.0)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
   - video_player (from `.symlinks/plugins/video_player/ios`)
+  - VODUpload
 
 SPEC REPOS:
   trunk:
+    - AlivcConan
+    - AliyunOSSiOS
+    - AliyunVideoSDKStd
     - FMDB
+    - QuCore-ThirdParty
     - Toast
+    - VODUpload
 
 EXTERNAL SOURCES:
   camera:
@@ -65,6 +83,9 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/video_player/ios"
 
 SPEC CHECKSUMS:
+  AlivcConan: afb3f657f23ae8476789deca6f14236f4cdd5d54
+  AliyunOSSiOS: 8db92936545593b9e5c66d680ef2ac0738946651
+  AliyunVideoSDKStd: 754c813921a2ee3f479410fab5dbd08c99fd66b9
   camera: a0ca5080336f7af47b88436e5e26da3dee5568f0
   easy_contact_picker: 9ab9dc70e8ddde6e76a19ffc482d7bf899868730
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
@@ -73,11 +94,13 @@ SPEC CHECKSUMS:
   image_picker: 9c3312491f862b28d21ecd8fdf0ee14e601b3f09
   path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
   permission_handler: 67637977b227d62d46bfbf524f335f8568de5a73
+  QuCore-ThirdParty: f3c49341745bd366e8557a8994407cbbda5c1c44
   shared_preferences: af6bfa751691cdc24be3045c43ec037377ada40d
   sqflite: 4001a31ff81d210346b500c55b17f4d6c7589dd0
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
   video_player: 9cc823b1d9da7e8427ee591e8438bfbcde500e6e
+  VODUpload: 2c8ac654ceda839dda97a92023a270041dd9901e
 
-PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
+PODFILE CHECKSUM: 3f90bdbb1b156c7d516e7d90ca3a78a1605942db
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.1

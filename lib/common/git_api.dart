@@ -16,7 +16,7 @@ class Git {
   BuildContext context;
   Options _options;
   static Dio dio = new Dio(BaseOptions(
-    baseUrl: 'http://3.138.155.112/',
+    baseUrl: 'http://3.17.149.71',
     headers: {
       HttpHeaders.acceptHeader: "application/json",
     },
@@ -65,7 +65,7 @@ class Git {
   // 注册接口，注册成功后返回用户信息
   Future register({Map<String, dynamic> queryParameters}) async {
     var r = await dio.post(
-      "http://postman-echo.com/post",
+      "/api/register",
       options: _options.merge(extra: {
         "noCache": true, //本接口禁用缓存
       }),
@@ -89,7 +89,7 @@ class Git {
       _options.extra.addAll({"refresh": true, "list": true});
     }
     var r = await dio.get<List>(
-      "user/repos",
+      "/user/repos",
       queryParameters: queryParameters,
       options: _options,
     );
