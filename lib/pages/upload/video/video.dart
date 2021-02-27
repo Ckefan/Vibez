@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class VideoUpload extends StatefulWidget {
   @override
@@ -9,6 +10,24 @@ class VideoUpload extends StatefulWidget {
 }
 
 class _VideoUploadState extends State<VideoUpload> {
+  static const platform = const MethodChannel('samples.flutter.dev/battery');
+
+  String _batteryLevel = 'Unknown battery level.';
+
+  Future<void> _getBatteryLevel() async {
+    String batteryLevel;
+    try {
+      final int result = await platform.invokeMethod('getBatteryLevel');
+      batteryLevel = 'Battery level at $result % .';
+    } on PlatformException catch (e) {
+      batteryLevel = "Failed to get battery level: '${e.message}'.";
+    }
+
+    setState(() {
+      _batteryLevel = batteryLevel;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,12 +37,23 @@ class _VideoUploadState extends State<VideoUpload> {
           Expanded(
             flex: 1,
             child: Container(
-              color: Colors.blue,
-            ),
+                color: Colors.blue,
+                child: Column(
+                  children: [
+                    ElevatedButton(
+                      child: Text('Get Battery Level'),
+                      onPressed: _getBatteryLevel,
+                    ),
+                    Text(_batteryLevel),
+                  ],
+                )),
           ),
           Expanded(
             flex: 2,
-            child: getMyPatformView(),
+            child: Container(
+              color: Colors.yellow,
+              child: getMyPatformView(),
+            ),
           ),
         ],
       ),
@@ -33,11 +63,11 @@ class _VideoUploadState extends State<VideoUpload> {
   Widget getMyPatformView() {
     if (defaultTargetPlatform == TargetPlatform.android) {
       return AndroidView(
-        viewType: 'MyUiKitView',
+        viewType: 'plugins.flutter.io/custom_platform_view',
       );
     } else if (defaultTargetPlatform == TargetPlatform.iOS) {
       return UiKitView(
-        viewType: 'MyUiKitView',
+        viewType: 'plugins.flutter.io/custom_platform_view',
       );
     }
 
